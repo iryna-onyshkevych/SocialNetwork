@@ -1,0 +1,1 @@
+# This is a project for a Non-relational Database course.
