@@ -8,5 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         
+        <Menu Height="35" VerticalAlignment="Top">
+            <MenuItem Header="Find">
+                <TextBox Width="200" Height="35">
+                    
+                </TextBox>
+            </MenuItem>
+        </Menu>
+        <TextBlock x:Name="posts1" Background="AliceBlue" Margin="0,35,-0.4,0" >
+            
+        </TextBlock>
     </Grid>
 </Window>
