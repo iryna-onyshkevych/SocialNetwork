@@ -11,16 +11,17 @@ namespace SocialNetwork.DataAccess.Models
     public class User
     {
         [BsonId]
-        public ObjectId Id { get; set; }
-
-        [BsonElement("name")]
+        public string Id { get; set; }
+        [BsonElement("password")]
+        public string Password { get; set; }
+        [BsonElement("firstName")]
         public string Name { get; set; }
-        [BsonElement("surname")]
+        [BsonElement("lastName")]
         public string Surname { get; set; }
         [BsonElement("email")]
         public string Email { get; set; }
 
-        [BsonElement("interest")]
+        [BsonElement("interests")]
         public List<string> Interests { get; set; }
 
     }

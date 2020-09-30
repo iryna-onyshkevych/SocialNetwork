@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,17 +36,34 @@ namespace SocialNetwork
 
     public partial class MainWindow : Window
     {
-       
+        
+
         public MainWindow()
         {
            
             InitializeComponent();
             LoginScreen passwordWindow = new LoginScreen();
-
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+            //User FUser = users.Where(u => u.Name == Name);
+            string ourId = "";
             if (passwordWindow.ShowDialog() == true)
             {
-                if (passwordWindow.Password == "12345678")
+                int passcount = 0;
+                foreach(var user in users)
+                {
+                    if (user.Password == passwordWindow.Password)
+                    {
+                        passcount++;
+                        ourId += user.Id;
+                    }
+                }
+                if (passcount == 1)
+                {
                     MessageBox.Show("Autherisation is passed");
+                    
+
+                }
                 else
                     MessageBox.Show("Password is incorrect");
             }
@@ -56,14 +71,22 @@ namespace SocialNetwork
             {
                 MessageBox.Show("Autherisation is not passed");
             }
+            foreach (var user in users)
+            {
+                if (user.Id == ourId)
+                {
+                   
+                    ourId += user.Id;
+                    MessageBox.Show(user.Name);
+                }
+            }
             //this.Closed += MainWindow_Closed;
-            //DataContest dataContext = new DataContest();
-            //List<User> users = dataContext.Users;
+
             //foreach (var user in users)
             //{
             //    MessageBox.Show(user.Id.ToString());
             //}
-            //User FUser = users.Where(u => u.Name == Nae && u.Pass);
+
 
             ////Console.ReadLine();
             //DataContest dataContext = new DataContest();
