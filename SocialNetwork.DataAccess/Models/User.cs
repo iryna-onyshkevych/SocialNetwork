@@ -23,7 +23,7 @@ namespace SocialNetwork.DataAccess.Models
 
         [BsonElement("interests")]
         public List<string> Interests { get; set; }
-        [BsonElement("folllowers")]
+        [BsonElement("followers")]
         public List<string> Followers { get; set; }
 
         [BsonElement("following")]

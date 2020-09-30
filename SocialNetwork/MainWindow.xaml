@@ -17,8 +17,9 @@
                 <TextBox x:Name="Lastname" Width="200" Height="35" >
                 </TextBox>
                 <StackPanel Orientation="Horizontal">
-                    <Button Click="ViewInfo" Margin="5">FindUser</Button>
-                    <Button Click="FindUs" Margin="5">SeePosts</Button>
+                    <Button Click="viewInfo" Margin="5">FindUser</Button>
+                    <Button Click="findPosts" Margin="5">SeePosts</Button>
+                    <Button Margin="5">Follow</Button>
                 </StackPanel>
             </MenuItem>
         </Menu>

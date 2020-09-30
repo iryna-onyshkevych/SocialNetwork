@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DataAccess.Helpers
 {
-    public class MongoDBHelper
+     public class MongoDBHelper
     {
         private readonly IMongoDatabase _db;
         public static MongoDBHelper CreateInstance(string connectionString, string databaseName)

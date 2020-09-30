@@ -16,7 +16,8 @@ namespace SocialNetwork.DataAccess.Models
         public string Title { get; set; }
         [BsonElement("comments")]
         public List<Comment> Comments { get; set; }
-       
+        [BsonElement("likes")]
+        public List<Like> Likes { get; set; }
 
     }
     public class Comment
@@ -28,6 +29,16 @@ namespace SocialNetwork.DataAccess.Models
         public string User { get; set; }
         [BsonElement("date")]
         public object CommentCreatedDate { get; set; }
+
+    }
+    public class Like
+    {
+        [BsonElement("amount")]
+
+        public int LikesAmount { get; set; }
+        [BsonElement("userslike")]
+        public string UsersLike { get; set; }
+       
 
     }
 }

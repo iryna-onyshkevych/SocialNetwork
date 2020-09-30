@@ -182,6 +182,10 @@
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork.BuisnesLogic\SocialNetwork.BuisnesLogic.csproj">
+      <Project>{cf7e5ec5-167f-48fc-b46b-3f24e1ddaf47}</Project>
+      <Name>SocialNetwork.BuisnesLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SocialNetwork.DataAccess\SocialNetwork.DataAccess.csproj">
       <Project>{0962E35A-3EE0-483A-922F-AC3A06E2642E}</Project>
       <Name>SocialNetwork.DataAccess</Name>
