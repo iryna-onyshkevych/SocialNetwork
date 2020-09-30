@@ -1,4 +1,6 @@
 ﻿using System;
+
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,8 @@ using System.Windows.Shapes;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Attributes;
+using SocialNetwork.DataAccess.Models;
+using SocialNetwork.DataAccess.Contest;
 
 namespace SocialNetwork
 {
@@ -37,12 +41,28 @@ namespace SocialNetwork
         
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
+
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+            foreach (var user in users)
+            {
+                MessageBox.Show(user.Id.ToString());
+            }
+            //User FUser = users.Where(u => u.Name == Nae && u.Pass);
+
+            ////Console.ReadLine();
+            //DataContest dataContext = new DataContest();
+            //List<User> users = dataContext.Users;
+            //foreach (var user in users)
+            //{
+            //    MessageBox.Show(user.Id.ToString());
+            //}
             //var client = new MongoClient("mongodb://localhost:27017");
             //var database = client.GetDatabase("socialnetwork");
             //IMongoCollection<BsonDocument> postsBsonCollection = database.GetCollection<BsonDocument>("users");
-     
-        
+
+
             ////var filterBuilder = Builders<BsonDocument>.Filter;
             ////var filter = filterBuilder.Eq("age", 453
             ////var postBSON = postsBsonCollection.Find(filter).ToList();
@@ -62,7 +82,7 @@ namespace SocialNetwork
             ////var course = courses.FindAllAs<users>().SetFields(Fields.Include("Title", "Description").Exclude("_id")).ToList(); 
 
             //var documents = postsBsonCollection.Find(new BsonDocument()).ToList();
-            
+
             //foreach (BsonDocument doc in documents)
             //{
 

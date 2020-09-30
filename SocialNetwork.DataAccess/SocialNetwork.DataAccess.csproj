@@ -104,7 +104,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contest\DataContest.cs" />
     <Compile Include="Helpers\MongoDBHelper.cs" />
     <Compile Include="Models\Post.cs" />

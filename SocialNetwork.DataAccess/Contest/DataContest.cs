@@ -18,6 +18,7 @@ namespace SocialNetwork.DataAccess.Contest
             var DataBaseName = "socialnetwork";
             MongoDBHelper mongoDb = MongoDBHelper.CreateInstance(ConnectionString, DataBaseName);
             Users = mongoDb.LoadAllDocuments<User>("users");
+            
             //Posts = mongoDb.LoadAllDocuments<Post>("posts");
         }
     }
