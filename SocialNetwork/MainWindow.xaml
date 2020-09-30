@@ -19,7 +19,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Click="viewInfo" Margin="5">FindUser</Button>
                     <Button Click="findPosts" Margin="5">SeePosts</Button>
-                    <Button Margin="5">Follow</Button>
+                    <Button Click ="followUser" Margin="5">Follow</Button>
                 </StackPanel>
             </MenuItem>
         </Menu>

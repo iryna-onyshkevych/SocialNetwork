@@ -41,7 +41,7 @@ namespace SocialNetwork.BuisnesLogic.Service
 
         public void Update(string id, User user)
         {
-            throw new NotImplementedException();
+            dBHelper.UpdateDocument<User>(CollectionName, id,user);
         }
     }
 }

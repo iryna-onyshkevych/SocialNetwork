@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DataAccess.Helpers
 {
-     public class MongoDBHelper
+     public  class MongoDBHelper
     {
         private readonly IMongoDatabase _db;
         public static MongoDBHelper CreateInstance(string connectionString, string databaseName)
@@ -45,7 +45,7 @@ namespace SocialNetwork.DataAccess.Helpers
             return collection.Find(filter).First();
         }
 
-        public void UpdateDocument<T>(string collectionName, Guid id, T document)
+        public void UpdateDocument<T>(string collectionName, string id, T document)
         {
             var collection = _db.GetCollection<T>(collectionName);
 

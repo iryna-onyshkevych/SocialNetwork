@@ -45,9 +45,9 @@ namespace SocialNetwork
 
 
         }
-        public string ourId = "";
-        public List<string> ourfollowers = new List<string>();
-        public List<string> ourfollowing = new List<string>();
+        public string ourId = "";//id залогованого користувача
+        public List<string> ourfollowers = new List<string>();//список читачів залогованого користувача
+        public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
         private void Info()
         {
             LoginScreen passwordWindow = new LoginScreen();
@@ -60,24 +60,32 @@ namespace SocialNetwork
 
             if (passwordWindow.ShowDialog() == true)
             {
-                int passcount = 0;
+                int passcount = 0;//лічильник для перевірки на правильність пароля
                 foreach (var user in users)
                 {
-                    if (user.Password == passwordWindow.Password)
+                    if (user.Password == passwordWindow.Password)//якщо введений пароль є серед паролів користувачів
                     {
                         passcount++;
-                        ourId += user.Id;
-                        for (int i = 0; i < user.Followers.Count; i++)
+                        ourId = user.Id;
+                        if (user.Followers.Count != 0)
                         {
-                            ourfollowers.Add(user.Followers[i]);
+                            for (int i = 0; i < user.Followers.Count; i++)
+                            {
+                                ourfollowers.Add(user.Followers[i]);//шукаємо читачів залогованого користувача
+                            }
                         }
-                        for (int i = 0; i < user.Following.Count; i++)
+                        
+                      
+                        else
                         {
-                            ourfollowing.Add(user.Following[i]);
+                            for (int i = 0; i < user.Following.Count; i++)
+                            {
+                                ourfollowing.Add(user.Following[i]);//шукаємо підписки залогованого користувача
+                            }
                         }
                     }
                 }
-                if (passcount == 1)
+                if (passcount == 1)//пароль співпав з одним із паролів в бд
                 {
                     MessageBox.Show("Autherisation is passed");
 
@@ -95,21 +103,24 @@ namespace SocialNetwork
                 if (user.Id == ourId)
                 {
 
-                    ourId += user.Id;
+                    ourId = user.Id;
                     MessageBox.Show(user.Name);
                 }
             }
-            for (int i = 0; i < ourfollowers.Count; i++)
-            {
-                MessageBox.Show(ourfollowers[i]);
-            }
-            for (int i = 0; i < ourfollowing.Count; i++)
-            {
-                MessageBox.Show(ourfollowing[i]);
-            }
+            //for (int i = 0; i < ourfollowers.Count; i++)
+            //{
+            //    MessageBox.Show(ourfollowers[i]);
+            //}
+            //for (int i = 0; i < ourfollowing.Count; i++)
+            //{
+            //    MessageBox.Show(ourfollowing[i]);
+            //}
             
 
         }
+
+       
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //LoginScreen taskWindow = new LoginScreen();
@@ -121,40 +132,43 @@ namespace SocialNetwork
 
         }
 
-
-        public List<string> newfollowers = new List<string>();
-        public List<string> newfollowing = new List<string>();
-        private void viewInfo(object sender, RoutedEventArgs e)
+        public string userId = "";//id знайденого користувача
+        public List<string> newfollowers = new List<string>();//список читачів знайденого користувача
+        public List<string> newfollowing = new List<string>();//список підписок знайденого користувача
+        public string emailus = "";//id знайденого користувача
+        private void viewInfo(object sender, RoutedEventArgs e)//інформація про знайденого нами користувача
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
-            int countus = 0;
+            int countus = 0;//лічильник
             foreach (var user in users)
             {
                 
-                if ((user.Name == Firstname.Text) && (user.Surname == Lastname.Text))
+                if ((user.Name == Firstname.Text) && (user.Surname == Lastname.Text))//перевіряємо, чи дані введеного користувач є в бд
                 {
                     countus++;
                     MessageBox.Show("User's info is opened in new tab");
                    
                     TextBlock newText = new TextBlock();
                     newText.TextWrapping = TextWrapping.Wrap;
-                    tab1.Items.Add(new TabItem { Header = new TextBlock { Text = user.Name + " " + user.Surname }, Content = newText });
+                    tab1.Items.Add(new TabItem { Header = new TextBlock { Text = user.Name + " " + user.Surname }, Content = newText });//додаємо дані внову вкладку
                     newText.Text += "Name: " + user.Name + "\n";
                     newText.Text += "Surname: " + user.Surname + "\n";
                     //newText.Text += "\n";
                     newText.Text += "Interests:";
+                    userId = user.Id;
+                    emailus = user.Email;
                     for (int i = 0; i < user.Interests.Count; i++)
                     {
                         newText.Text += user.Interests[i];
-                        if (i != user.Interests.Count - 1)
+                        if (i != user.Interests.Count - 1)//ставим кому, перед наступним зацікавленням, якщо воно не останнє
                             newText.Text += ", ";
                     }
-                    for (int i = 0; i < user.Followers.Count; i++)
+                    for (int i = 0; i < user.Followers.Count; i++)//шукаємо читачів знайденого користувача
                     {
                         newfollowers.Add(user.Followers[i]);
                     }
-                    for (int i = 0; i < user.Following.Count; i++)
+                    for (int i = 0; i < user.Following.Count; i++)//шукаємо підписки знайденого користувача
                     {
                         newfollowing.Add(user.Following[i]);
                     }
@@ -178,27 +192,24 @@ namespace SocialNetwork
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             int check = 0;
-            for (int i = 0; i < newfollowing.Count; i++)
-            {
-                if (ourId == newfollowing[i])
-                    check++;
-            }
-            if (check == 0)
-            {
+            User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
+            User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            ouruser.Following.Add(founduser.Id);
+            founduser.Followers.Add(ouruser.Id);
 
-                //List<User> users = database.GetCollection<User>("users");
-                //var user = new User();
-                //user.Name = "New";
-                ////newPost.Interests = new string[] { "bowling" };
-                //IMongoCollection<User> postsCollection = database.GetCollection<User>("users");
-                //postsCollection.InsertOne(user);
-                var user1 = new User();
-                
-                user1.Followers[newfollowers.Count + 1] = ourId;
-                UserService userService = new UserService();
-                userService.Create(user1);
+            UserService userservice = new UserService();
+            userservice.Update(ourId, ouruser);
+            userservice.Update(userId, founduser);
 
-            }
+
+
+
+
+
+
+
+
+
 
 
         }
