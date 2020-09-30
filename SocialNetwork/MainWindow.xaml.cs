@@ -38,17 +38,31 @@ namespace SocialNetwork
 
     public partial class MainWindow : Window
     {
-        
+       
         public MainWindow()
         {
+           
             InitializeComponent();
+            LoginScreen passwordWindow = new LoginScreen();
 
-            DataContest dataContext = new DataContest();
-            List<User> users = dataContext.Users;
-            foreach (var user in users)
+            if (passwordWindow.ShowDialog() == true)
             {
-                MessageBox.Show(user.Id.ToString());
+                if (passwordWindow.Password == "12345678")
+                    MessageBox.Show("Autherisation is passed");
+                else
+                    MessageBox.Show("Password is incorrect");
             }
+            else
+            {
+                MessageBox.Show("Autherisation is not passed");
+            }
+            //this.Closed += MainWindow_Closed;
+            //DataContest dataContext = new DataContest();
+            //List<User> users = dataContext.Users;
+            //foreach (var user in users)
+            //{
+            //    MessageBox.Show(user.Id.ToString());
+            //}
             //User FUser = users.Where(u => u.Name == Nae && u.Pass);
 
             ////Console.ReadLine();
@@ -97,6 +111,15 @@ namespace SocialNetwork
 
 
 
+        }
+        //void MainWindow_Closed(object sender, EventArgs e)
+        //{
+        //    App.Current.Shutdown();
+        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //LoginScreen taskWindow = new LoginScreen();
+            //taskWindow.Show();
         }
     }
 }

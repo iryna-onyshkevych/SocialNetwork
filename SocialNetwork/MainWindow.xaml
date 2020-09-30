@@ -15,8 +15,9 @@
                 </TextBox>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="posts1" Background="AliceBlue" Margin="0,35,-0.4,0" >
+        <!--<TextBox x:Name="posts1" Background="AliceBlue" Margin="0,35,-0.4,0" >
             
-        </TextBox>
+        </TextBox>-->
+        
     </Grid>
 </Window>
