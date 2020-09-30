@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,24 @@ namespace SocialNetwork.DataAccess.Models
 {
    public  class Post
     {
+        [BsonId]
+        public string Id { get; set; }
+        [BsonElement("title")]
+        public string Title { get; set; }
+        [BsonElement("comments")]
+        public List<Comment> Comments { get; set; }
+       
+
+    }
+    public class Comment
+    {
+        [BsonElement("body")]
+
+        public string Commentbody { get; set; }
+        [BsonElement("user")]
+        public string User { get; set; }
+        [BsonElement("date")]
+        public object CommentCreatedDate { get; set; }
 
     }
 }
