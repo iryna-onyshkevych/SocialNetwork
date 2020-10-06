@@ -28,22 +28,22 @@ namespace SocialNetwork
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    
-  
+
+
 
     public partial class MainWindow : Window
     {
-        
+
 
         public MainWindow()
         {
-           
+
             InitializeComponent();
 
 
             Info();
-            
-          
+
+
 
 
         }
@@ -52,30 +52,30 @@ namespace SocialNetwork
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
         private void Info()
         {
-            
+
             LoginScreen passwordWindow = new LoginScreen();
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             List<Post> posts = dataContext.Posts;
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
-          
+
             foreach (var post in posts)
             {
-                
+
                 //text1.Text = "";
                 text1.Text += "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
                 foreach (var post1 in post.Comments)
                 {
-                    text1.Text += "\n" +"Comments:" +"\n";
+                    text1.Text += "\n" + "Comments:" + "\n";
                     for (int i = 0; i < post1.CommentBody.Count(); i++)
-                        text1.Text += post1.CommentBody[i] + "\n"+ post1.Name[i] + " " + post1.Surname[i] + "\n";
+                        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
                     text1.Text += "\n";
 
                 }
             }
-           
-            tab1.Items.Add(new TabItem { Header = new TextBox { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
+
+            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
 
             //User FUser = users.Where(u => u.Name == Name);
 
@@ -98,8 +98,8 @@ namespace SocialNetwork
                                 ourfollowers.Add(user.Followers[i]);//шукаємо читачів залогованого користувача
                             }
                         }
-                        
-                      
+
+
                         else
                         {
                             for (int i = 0; i < user.Following.Count; i++)
@@ -139,11 +139,11 @@ namespace SocialNetwork
             //{
             //    MessageBox.Show(ourfollowing[i]);
             //}
-            
+
 
         }
 
-       
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -167,12 +167,12 @@ namespace SocialNetwork
             int countus = 0;//лічильник
             foreach (var user in users)
             {
-                
+
                 if ((user.Name == Firstname.Text) && (user.Surname == Lastname.Text))//перевіряємо, чи дані введеного користувач є в бд
                 {
                     countus++;
                     MessageBox.Show("User's info is opened in new tab");
-                   
+
                     TextBlock newText = new TextBlock();
                     newText.TextWrapping = TextWrapping.Wrap;
                     tab1.Items.Add(new TabItem { Header = new TextBlock { Text = user.Name + " " + user.Surname }, Content = newText });//додаємо дані внову вкладку
@@ -202,10 +202,10 @@ namespace SocialNetwork
             if (countus == 0)
                 MessageBox.Show("There's no such user");
 
-            
+
         }
 
-      
+
 
         private void followUser(object sender, RoutedEventArgs e)
         {
@@ -215,7 +215,7 @@ namespace SocialNetwork
             int check = 0;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
-            
+
             ouruser.Following.Add(founduser.Id);
             founduser.Followers.Add(ouruser.Id);
 
@@ -238,7 +238,32 @@ namespace SocialNetwork
 
         private void findPosts(object sender, RoutedEventArgs e)
         {
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+            int check = 0;
+            User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
+            List<Post> posts = dataContext.Posts;
 
+            Post post1 = posts.Where(u => (u.Name == founduser.Name) && (u.Surname == founduser.Surname)).FirstOrDefault();
+            TextBlock newText1 = new TextBlock();
+            newText1.TextWrapping = TextWrapping.Wrap;
+            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "Posts" }, Content = newText1 });//додаємо дані внову вкладку
+            foreach (var post in posts)
+            {
+                if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
+                    //text1.Text = "";
+                    newText1.Text += "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                    foreach (var post2 in post.Comments)
+                    {
+                        newText1.Text += "\n" + "Comments:" + "\n";
+                        for (int i = 0; i < post2.CommentBody.Count(); i++)
+                            newText1.Text += post2.CommentBody[i] + "\n" + post2.Name[i] + " " + post2.Surname[i] + "\n";
+                        newText1.Text += "\n";
+
+                    }
+                }
+            }
+            MessageBox.Show("User's posts are opened in new tab");
         }
     }
 }
