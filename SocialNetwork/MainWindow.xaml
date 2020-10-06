@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:SocialNetwork"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="grid" Background ="AliceBlue">
+    <Grid x:Name="grid" Background ="Crimson">
         
-        <Menu x:Name="tab"  Height="35" VerticalAlignment="Top" Background="AliceBlue">
+        <Menu x:Name="tab"  Height="35" VerticalAlignment="Top" Background="Aqua">
             <MenuItem Header="Find" Click="MenuItem_Click">
                 <Label Content="Enter Name"></Label>
                 <TextBox x:Name="Firstname" Width="200" Height="35" >
@@ -24,8 +24,9 @@
             </MenuItem>
         </Menu>
         <TabControl x:Name="tab1" Background="AliceBlue"   Height="319" Margin="0,0,-0.4,0">
-            <Image Source="C:\Users\irini\OneDrive\Робочий стіл\1.jpg" Width="780" Height="900"></Image>
-
+                <!--<Image Source="C:\Users\irini\OneDrive\Робочий стіл\1.jpg" Width="780" Height="900"></Image>-->
+            <!--<TextBlock Margin="0,0,596,159.2" Background="DeepPink"></TextBlock>-->
+            
         </TabControl>
         <!--<TextBox x:Name="posts1" Background="AliceBlue" Margin="0,35,-0.4,0" >
             

@@ -8,37 +8,44 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.DataAccess.Models
 {
-   public  class Post
+    public class Post
     {
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-        [BsonElement("title")]
-        public string Title { get; set; }
+        [BsonElement("body")]
+        public string Body { get; set; }
+
+        [BsonElement("likes")]
+        public int Like { get; set; }
         [BsonElement("comments")]
         public List<Comment> Comments { get; set; }
-        [BsonElement("likes")]
-        public List<Like> Likes { get; set; }
+        [BsonElement("name")]
+        public string Name { get; set; }
+        [BsonElement("surname")]
+        public string Surname { get; set; }
+        [BsonElement("dateofpublishing")]
+        public object DateOfPublishing { get; set; }
 
     }
+    
     public class Comment
     {
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
+        //public string Id { get; set; }
         [BsonElement("body")]
+        public List<string> CommentBody { get; set; }
+        [BsonElement("name")]
+        public List<string> Name { get; set; }
+   
+        [BsonElement("surname")]
+        public List<string> Surname { get; set; }
+      
+        //[BsonElement("surname")]
+        //public string Surname { get; set; }
 
-        public string Commentbody { get; set; }
-        [BsonElement("user")]
-        public string User { get; set; }
-        [BsonElement("date")]
-        public object CommentCreatedDate { get; set; }
-
-    }
-    public class Like
-    {
-        [BsonElement("amount")]
-
-        public int LikesAmount { get; set; }
-        [BsonElement("userslike")]
-        public string UsersLike { get; set; }
-       
 
     }
+   
 }

@@ -39,6 +39,8 @@ namespace SocialNetwork
         {
            
             InitializeComponent();
+
+
             Info();
             
           
@@ -50,11 +52,33 @@ namespace SocialNetwork
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
         private void Info()
         {
+            
             LoginScreen passwordWindow = new LoginScreen();
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
+            List<Post> posts = dataContext.Posts;
+            TextBox text1 = new TextBox();
+            text1.TextWrapping = TextWrapping.Wrap;
+          
+            foreach (var post in posts)
+            {
+                
+                //text1.Text = "";
+                text1.Text += "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                foreach (var post1 in post.Comments)
+                {
+                    text1.Text += "\n" +"Comments:" +"\n";
+                    for (int i = 0; i < post1.CommentBody.Count(); i++)
+                        text1.Text += post1.CommentBody[i] + "\n"+ post1.Name[i] + " " + post1.Surname[i] + "\n";
+                    text1.Text += "\n";
+
+                }
+            }
+           
+            tab1.Items.Add(new TabItem { Header = new TextBox { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
+
             //User FUser = users.Where(u => u.Name == Name);
-            
+
             //List<string> ourfollowers = new List<string>();
             //List<string> ourfollowing = new List<string>();
 
@@ -155,7 +179,7 @@ namespace SocialNetwork
                     newText.Text += "Name: " + user.Name + "\n";
                     newText.Text += "Surname: " + user.Surname + "\n";
                     //newText.Text += "\n";
-                    newText.Text += "Interests:";
+                    newText.Text += "Interests: ";
                     userId = user.Id;
                     emailus = user.Email;
                     for (int i = 0; i < user.Interests.Count; i++)
@@ -181,10 +205,7 @@ namespace SocialNetwork
             
         }
 
-        private void findPosts(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
 
         private void followUser(object sender, RoutedEventArgs e)
         {
@@ -194,12 +215,15 @@ namespace SocialNetwork
             int check = 0;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            
             ouruser.Following.Add(founduser.Id);
             founduser.Followers.Add(ouruser.Id);
 
             UserService userservice = new UserService();
             userservice.Update(ourId, ouruser);
             userservice.Update(userId, founduser);
+            //List<Post> post = dataContext.Posts;
+            //post.ElementAtOrDefault<Post>(1).Comments.ElementAtOrDefault(1);
 
 
 
@@ -210,7 +234,10 @@ namespace SocialNetwork
 
 
 
+        }
 
+        private void findPosts(object sender, RoutedEventArgs e)
+        {
 
         }
     }
