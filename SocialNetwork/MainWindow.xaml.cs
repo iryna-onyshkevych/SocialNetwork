@@ -59,12 +59,11 @@ namespace SocialNetwork
             List<Post> posts = dataContext.Posts;
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
+            int amount = 1;
 
             foreach (var post in posts)
             {
-
-                //text1.Text = "";
-                text1.Text += "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                text1.Text += amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
                 foreach (var post1 in post.Comments)
                 {
                     text1.Text += "\n" + "Comments:" + "\n";
@@ -73,6 +72,8 @@ namespace SocialNetwork
                     text1.Text += "\n";
 
                 }
+                amount++;
+
             }
 
             tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
@@ -248,11 +249,12 @@ namespace SocialNetwork
             TextBlock newText1 = new TextBlock();
             newText1.TextWrapping = TextWrapping.Wrap;
             tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "Posts" }, Content = newText1 });//додаємо дані внову вкладку
+            int amount = 1;
             foreach (var post in posts)
             {
                 if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
                     //text1.Text = "";
-                    newText1.Text += "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                    newText1.Text += amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
                     foreach (var post2 in post.Comments)
                     {
                         newText1.Text += "\n" + "Comments:" + "\n";
@@ -261,9 +263,32 @@ namespace SocialNetwork
                         newText1.Text += "\n";
 
                     }
+                    amount++;
+
                 }
+
             }
             MessageBox.Show("User's posts are opened in new tab");
+        }
+
+        private void likePost(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addComment(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Click1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
