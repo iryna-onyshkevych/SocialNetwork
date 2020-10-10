@@ -20,6 +20,8 @@ using SocialNetwork.DataAccess.Contest;
 using DocumentFormat.OpenXml.Spreadsheet;
 using SocialNetwork.DataAccess.Helpers;
 using SocialNetwork.BuisnesLogic.Service;
+using MongoDB.Driver.Builders;
+using DocumentFormat.OpenXml.Wordprocessing;
 //using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SocialNetwork
@@ -50,30 +52,47 @@ namespace SocialNetwork
         public string ourId = "";//id залогованого користувача
         public List<string> ourfollowers = new List<string>();//список читачів залогованого користувача
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
-        private void Info()
+       
+            private void Info()
         {
 
             LoginScreen passwordWindow = new LoginScreen();
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             List<Post> posts = dataContext.Posts;
+            List<Post> SortedList = posts.OrderBy(o => o.DateOfPublishing).ToList(); 
+           
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
             int amount = 1;
+            //List<Post> sortedposts; int temp;
+         
+            //Post newp = posts.Find(e=>e.DateOfPublishing).Where(u => u.Id == userId).FirstOrDefault();
 
+            
             foreach (var post in posts)
             {
-                text1.Text += amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
-                foreach (var post1 in post.Comments)
-                {
-                    text1.Text += "\n" + "Comments:" + "\n";
-                    for (int i = 0; i < post1.CommentBody.Count(); i++)
-                        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
-                    text1.Text += "\n";
 
-                }
-                amount++;
+                //text[k] = Convert.ToInt32(post.DateOfPublishing);
+                //text1.Text += post.DateOfPublishing.ToString()+ amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                //foreach (var post1 in post.Comments)
+                //{
 
+                //    text1.Text += "\n" + "Comments:" + "\n";
+                //    for (int i = 0; i < post1.CommentBody.Count(); i++)
+                //    {
+
+                //        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
+                //    }
+                //    text1.Text += "\n";
+
+                //}
+                //amount++;
+
+            }
+            foreach (var post in SortedList)
+            {
+                MessageBox.Show(post.Name);
             }
 
             tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
@@ -216,7 +235,7 @@ namespace SocialNetwork
             int check = 0;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
-
+          
             ouruser.Following.Add(founduser.Id);
             founduser.Followers.Add(ouruser.Id);
 

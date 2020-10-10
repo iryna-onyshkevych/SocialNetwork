@@ -25,8 +25,9 @@ namespace SocialNetwork.DataAccess.Models
         [BsonElement("surname")]
         public string Surname { get; set; }
         [BsonElement("dateofpublishing")]
-        public object DateOfPublishing { get; set; }
+        public DateTime DateOfPublishing { get; set; }
 
+       
     }
     
     public class Comment
