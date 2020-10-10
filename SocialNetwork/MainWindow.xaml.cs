@@ -60,7 +60,7 @@ namespace SocialNetwork
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             List<Post> posts = dataContext.Posts;
-            List<Post> SortedList = posts.OrderBy(o => o.DateOfPublishing).ToList(); 
+            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); 
            
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
@@ -70,24 +70,23 @@ namespace SocialNetwork
             //Post newp = posts.Find(e=>e.DateOfPublishing).Where(u => u.Id == userId).FirstOrDefault();
 
             
-            foreach (var post in posts)
+            foreach (var post in SortedList)
             {
 
-                //text[k] = Convert.ToInt32(post.DateOfPublishing);
-                //text1.Text += post.DateOfPublishing.ToString()+ amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
-                //foreach (var post1 in post.Comments)
-                //{
+                text1.Text +=  amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                foreach (var post1 in post.Comments)
+                {
 
-                //    text1.Text += "\n" + "Comments:" + "\n";
-                //    for (int i = 0; i < post1.CommentBody.Count(); i++)
-                //    {
+                    text1.Text += "\n" + "Comments:" + "\n";
+                    for (int i = 0; i < post1.CommentBody.Count(); i++)
+                    {
 
-                //        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
-                //    }
-                //    text1.Text += "\n";
+                        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
+                    }
+                    text1.Text += "\n";
 
-                //}
-                //amount++;
+                }
+                amount++;
 
             }
             foreach (var post in SortedList)
