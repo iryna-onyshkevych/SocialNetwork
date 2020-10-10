@@ -25,6 +25,13 @@
                 </StackPanel>
             </MenuItem>
             <MenuItem Header="Comment" Click="MenuItem_Click1">
+                <Label Content="Enter the number of a post"></Label>
+                <TextBox x:Name="postnumber" Width="157" Height="35" >
+                </TextBox>
+                <Label Content="Write a comment"></Label>
+                <TextBox x:Name="comment" Width="157" Height="65" >
+                </TextBox>
+                <Button Click ="Comment"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Comment</Button>
             </MenuItem>
             
             <MenuItem Header="Create Post" Click="MenuItem_Click2">

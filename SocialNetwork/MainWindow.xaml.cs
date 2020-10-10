@@ -17,12 +17,9 @@ using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Attributes;
 using SocialNetwork.DataAccess.Models;
 using SocialNetwork.DataAccess.Contest;
-using DocumentFormat.OpenXml.Spreadsheet;
 using SocialNetwork.DataAccess.Helpers;
 using SocialNetwork.BuisnesLogic.Service;
 using MongoDB.Driver.Builders;
-using DocumentFormat.OpenXml.Wordprocessing;
-//using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SocialNetwork
 {
@@ -78,11 +75,13 @@ namespace SocialNetwork
                 {
 
                     text1.Text += "\n" + "Comments:" + "\n";
-                    for (int i = 0; i < post1.CommentBody.Count(); i++)
-                    {
+                    text1.Text += post1.CommentBody + "\n" + post1.Name + " " + post1.Surname + "\n";
 
-                        text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
-                    }
+                    //for (int i = 0; i < post1.CommentBody.Count(); i++)
+                    //{
+
+                    //    text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
+                    //}
                     text1.Text += "\n";
 
                 }
@@ -276,8 +275,7 @@ namespace SocialNetwork
                     foreach (var post2 in post.Comments)
                     {
                         newText1.Text += "\n" + "Comments:" + "\n";
-                        for (int i = 0; i < post2.CommentBody.Count(); i++)
-                            newText1.Text += post2.CommentBody[i] + "\n" + post2.Name[i] + " " + post2.Surname[i] + "\n";
+                        newText1.Text += post2.CommentBody+ "\n" + post2.Name + " " + post2.Surname + "\n";
                         newText1.Text += "\n";
 
                     }
@@ -307,6 +305,25 @@ namespace SocialNetwork
         private void MenuItem_Click1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Comment(object sender, RoutedEventArgs e)
+        {
+            string newId = "";
+            DataContest dataContext = new DataContest();
+            List<Post> posts = dataContext.Posts;
+            Post newcomment = posts.Where(u => u.Id == newId).FirstOrDefault();
+            
+            Comment commentForm = new Comment();
+            //commentForm.Name = "df";
+            //    Comments comment = commentForm.GetComment();
+            //Post post_ = new Post();
+            //post_ = posts.ElementAtOrDefault(Id);
+            //post_.Comments.Append(comment);
+            //postService.Update(posts.ElementAtOrDefault(Id).Id, post_);
+            //UserService userservice = new UserService();
+            //userservice.Update(ourId, ouruser);
+            //userservice.Update(userId, founduser);
         }
     }
 }

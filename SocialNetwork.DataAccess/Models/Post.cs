@@ -36,12 +36,12 @@ namespace SocialNetwork.DataAccess.Models
         //[BsonRepresentation(BsonType.ObjectId)]
         //public string Id { get; set; }
         [BsonElement("body")]
-        public List<string> CommentBody { get; set; }
+        public string CommentBody { get; set; }
         [BsonElement("name")]
-        public List<string> Name { get; set; }
+        public string Name { get; set; }
    
         [BsonElement("surname")]
-        public List<string> Surname { get; set; }
+        public string Surname { get; set; }
       
         //[BsonElement("surname")]
         //public string Surname { get; set; }
