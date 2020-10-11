@@ -8,17 +8,21 @@
         Title="LoginScreen" Height="450" Width="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock>Enter password:</TextBlock>
-        <TextBox Name="passwordBox" Grid.Row="1" MinWidth="250" ></TextBox>
-
-        <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0">OK</Button>
-            <Button IsCancel="True" MinWidth="60">Cancel</Button>
+        
+        <TextBlock Grid.Row="0" Background="LightCyan">Enter email:</TextBlock>
+        <TextBox Name="emailBox" Grid.Row="1" MinWidth="250" ></TextBox>
+        <TextBlock Grid.Row="2" Background="LightCyan" >Enter password:</TextBlock>
+        <TextBox Name="passwordBox" Grid.Row="3" MinWidth="250" ></TextBox>
+        <WrapPanel Grid.Row="4" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0" Background="LightCyan" Height="38">OK</Button>
+            <Button IsCancel="True" MinWidth="60" Background="Pink">Cancel</Button>
         </WrapPanel>
 
     </Grid>

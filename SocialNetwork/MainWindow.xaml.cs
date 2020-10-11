@@ -83,7 +83,7 @@ namespace SocialNetwork
                 int passcount = 0;//лічильник для перевірки на правильність пароля
                 foreach (var user in users)
                 {
-                    if (user.Password == passwordWindow.Password)//якщо введений пароль є серед паролів користувачів
+                    if ((user.Password == passwordWindow.Password)&&(user.Email== passwordWindow.Email))//якщо введений пароль є серед паролів користувачів
                     {
                         passcount++;
                         ourId = user.Id;
@@ -114,11 +114,16 @@ namespace SocialNetwork
 
                 }
                 else
-                    MessageBox.Show("Password is incorrect");
+                {
+                    MessageBox.Show("Password or email is incorrect");
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Autherisation is not passed");
+                this.Close();
+
             }
             foreach (var user in users)
             {
@@ -126,7 +131,7 @@ namespace SocialNetwork
                 {
 
                     ourId = user.Id;
-                    MessageBox.Show(user.Name);
+                    MessageBox.Show("Welcome, "+user.Name+ " " +user.Surname+ "!");
                 }
             }
             
@@ -359,7 +364,7 @@ namespace SocialNetwork
         }
 
       
-
+        
         private void Like(object sender, RoutedEventArgs e)
         {
             string postId = "";

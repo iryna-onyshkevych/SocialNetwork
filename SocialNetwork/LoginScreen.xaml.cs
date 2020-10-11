@@ -34,6 +34,10 @@ namespace SocialNetwork
         {
             get { return passwordBox.Text; }
         }
+        public string Email
+        {
+            get { return emailBox.Text; }
+        }
 
     }
 }
