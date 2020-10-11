@@ -313,6 +313,28 @@ namespace SocialNetwork
             newpost.Surname = oursurname;
             newpost.DateOfPublishing = DateTime.Now;
             newpost.Id = "5f735b557067227c2a233264";
+            List<string> ids = new List<string>();
+            string newid = RandomString(24);
+
+            foreach (var currentposts in posts)
+            {
+                ids.Add(currentposts.Id);
+            }
+            int temp = ids.Count;
+            while (temp!=0)
+            {
+                if (ids[ids.Count - 1] == newid)
+                {
+                    newid = RandomString(24);
+                    temp = ids.Count;
+                }
+                else
+                    temp--;
+
+
+            }
+
+            newpost.Id = newid;
             newpost.Comments = new List<Comment> { };
             //Comment comment2 = new Comment();
             //comment2.Name = "aa";
@@ -323,11 +345,11 @@ namespace SocialNetwork
             postservice.Create(newpost);
 
         }
-        //private static Random random = new Random();
-        //public static string RandomString(int length)
-        //{
-        //    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        //    return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
-        //}
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
     }
 }
