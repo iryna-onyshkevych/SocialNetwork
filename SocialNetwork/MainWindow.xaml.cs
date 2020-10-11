@@ -32,18 +32,13 @@ namespace SocialNetwork
 
     public partial class MainWindow : Window
     {
-
+        
 
         public MainWindow()
         {
-
+        
             InitializeComponent();
-
-
             Info();
-
-
-
 
         }
         public string ourId = "";//id залогованого користувача
@@ -57,48 +52,29 @@ namespace SocialNetwork
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             List<Post> posts = dataContext.Posts;
-            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); 
+            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
            
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
             int amount = 1;
-            //List<Post> sortedposts; int temp;
-         
-            //Post newp = posts.Find(e=>e.DateOfPublishing).Where(u => u.Id == userId).FirstOrDefault();
-
-            
+           
             foreach (var post in SortedList)
             {
 
-                text1.Text +=  amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                text1.Text += "\n" +  amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
                 foreach (var post1 in post.Comments)
                 {
 
-                    text1.Text += "\n" + "Comments:" + "\n";
+                    text1.Text += "Comment:" + "\n";
                     text1.Text += post1.CommentBody + "\n" + post1.Name + " " + post1.Surname + "\n";
 
-                    //for (int i = 0; i < post1.CommentBody.Count(); i++)
-                    //{
-
-                    //    text1.Text += post1.CommentBody[i] + "\n" + post1.Name[i] + " " + post1.Surname[i] + "\n";
-                    //}
-                    text1.Text += "\n";
-
                 }
+                text1.Text += "\n";
                 amount++;
 
             }
-            foreach (var post in SortedList)
-            {
-                MessageBox.Show(post.Name);
-            }
-
+           
             tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
-
-            //User FUser = users.Where(u => u.Name == Name);
-
-            //List<string> ourfollowers = new List<string>();
-            //List<string> ourfollowing = new List<string>();
 
             if (passwordWindow.ShowDialog() == true)
             {
@@ -149,16 +125,7 @@ namespace SocialNetwork
                     MessageBox.Show(user.Name);
                 }
             }
-            //for (int i = 0; i < ourfollowers.Count; i++)
-            //{
-            //    MessageBox.Show(ourfollowers[i]);
-            //}
-            //for (int i = 0; i < ourfollowing.Count; i++)
-            //{
-            //    MessageBox.Show(ourfollowing[i]);
-            //}
-
-
+            
         }
 
 
@@ -230,7 +197,6 @@ namespace SocialNetwork
 
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
-            int check = 0;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
           
@@ -240,25 +206,13 @@ namespace SocialNetwork
             UserService userservice = new UserService();
             userservice.Update(ourId, ouruser);
             userservice.Update(userId, founduser);
-            //List<Post> post = dataContext.Posts;
-            //post.ElementAtOrDefault<Post>(1).Comments.ElementAtOrDefault(1);
-
-
-
-
-
-
-
-
-
-
+            
         }
 
         private void findPosts(object sender, RoutedEventArgs e)
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
-            int check = 0;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             List<Post> posts = dataContext.Posts;
 
@@ -309,21 +263,24 @@ namespace SocialNetwork
 
         private void Comment(object sender, RoutedEventArgs e)
         {
-            string newId = "";
+            string postId = "";
             DataContest dataContext = new DataContest();
             List<Post> posts = dataContext.Posts;
-            Post newcomment = posts.Where(u => u.Id == newId).FirstOrDefault();
-            
-            Comment commentForm = new Comment();
-            //commentForm.Name = "df";
-            //    Comments comment = commentForm.GetComment();
-            //Post post_ = new Post();
-            //post_ = posts.ElementAtOrDefault(Id);
-            //post_.Comments.Append(comment);
-            //postService.Update(posts.ElementAtOrDefault(Id).Id, post_);
-            //UserService userservice = new UserService();
-            //userservice.Update(ourId, ouruser);
-            //userservice.Update(userId, founduser);
+            List < User > users = dataContext.Users;
+            User founduser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            Comment comment1 = new Comment();
+            comment1.Name = founduser.Name;
+            comment1.Surname = founduser.Surname;
+            comment1.CommentBody = comment.Text;
+            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
+            for (int i = 0; i < SortedList.Count; i++)
+                postId = SortedList[Convert.ToInt32(postnumber.Text)].Id;
+            Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
+            newcom.Comments.Add(comment1);
+
+            PostService postservice = new PostService();
+            postservice.Update(postId, newcom);
+
         }
     }
 }

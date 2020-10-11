@@ -11,7 +11,6 @@ namespace SocialNetwork.DataAccess.Models
     public class Post
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         [BsonElement("body")]
         public string Body { get; set; }
@@ -32,9 +31,7 @@ namespace SocialNetwork.DataAccess.Models
     
     public class Comment
     {
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
-        //public string Id { get; set; }
+
         [BsonElement("body")]
         public string CommentBody { get; set; }
         [BsonElement("name")]
@@ -43,8 +40,6 @@ namespace SocialNetwork.DataAccess.Models
         [BsonElement("surname")]
         public string Surname { get; set; }
       
-        //[BsonElement("surname")]
-        //public string Surname { get; set; }
 
 
     }

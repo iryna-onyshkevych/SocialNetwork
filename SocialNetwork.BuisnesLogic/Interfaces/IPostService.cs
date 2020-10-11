@@ -11,8 +11,8 @@ namespace SocialNetwork.BuisnesLogic.Interfaces
     {
             Post GetPosts(string id);
             List<Post> GetAllPosts();
-            void Create(Post user);
-            void Update(string id, Post user);
+            void Create(Post post);
+            void Update(string id, Post post);
             void Delete(string id);
 
         

@@ -1,4 +1,5 @@
-﻿using SocialNetwork.DataAccess.Helpers;
+﻿using SocialNetwork.BuisnesLogic.Interfaces;
+using SocialNetwork.DataAccess.Helpers;
 using SocialNetwork.DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.BuisnesLogic.Service
 {
-    class PostService
+    public class PostService : IPostsService
     {
         private string ConnectionString = "mongodb://localhost:27017";
         private string DataBaseName = "socialnetwork";
-        private string CollectionName = "users";
+        private string CollectionName = "posts";
         MongoDBHelper dBHelper;
         public PostService()
         {
@@ -28,12 +29,12 @@ namespace SocialNetwork.BuisnesLogic.Service
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Post> GetAllPosts()
+        public List<Post> GetAllPosts()
         {
-            throw new NotImplementedException();
+            return dBHelper.LoadAllDocuments<Post>(CollectionName);
         }
 
-        public Post GetUser(string id)
+        public Post GetPosts(string id)
         {
             throw new NotImplementedException();
         }
