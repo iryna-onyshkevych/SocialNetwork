@@ -170,7 +170,6 @@ namespace SocialNetwork
                     tab1.Items.Add(new TabItem { Header = new TextBlock { Text = user.Name + " " + user.Surname }, Content = newText });//додаємо дані внову вкладку
                     newText.Text += "Name: " + user.Name + "\n";
                     newText.Text += "Surname: " + user.Surname + "\n";
-                    //newText.Text += "\n";
                     newText.Text += "Interests: ";
                     userId = user.Id;
                     emailus = user.Email;
@@ -208,14 +207,15 @@ namespace SocialNetwork
             List<User> users = dataContext.Users;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
-          
+
             ouruser.Following.Add(founduser.Id);
             founduser.Followers.Add(ouruser.Id);
 
             UserService userservice = new UserService();
             userservice.Update(ourId, ouruser);
             userservice.Update(userId, founduser);
-            
+
+
         }
 
         private void FindPosts(object sender, RoutedEventArgs e)
@@ -347,11 +347,6 @@ namespace SocialNetwork
 
             newpost.Id = newid;
             newpost.Comments = new List<Comment> { };
-            //Comment comment2 = new Comment();
-            //comment2.Name = "aa";
-            //comment2.Surname = "aaa";
-            //comment2.CommentBody = "newtext";
-            //newpost.Comments.Add(comment2);
             PostService postservice = new PostService();
             postservice.Create(newpost);
 
@@ -367,7 +362,6 @@ namespace SocialNetwork
 
         private void Like(object sender, RoutedEventArgs e)
         {
-            //likepostnumber
             string postId = "";
             DataContest dataContext = new DataContest();
             List<Post> posts = dataContext.Posts;
@@ -380,6 +374,21 @@ namespace SocialNetwork
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
 
+        }
+
+        private void UnfollowUser(object sender, RoutedEventArgs e)
+        {
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+            User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
+            User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+
+            ouruser.Following.Remove(founduser.Id);
+            founduser.Followers.Remove(ouruser.Id);
+
+            UserService userservice = new UserService();
+            userservice.Update(ourId, ouruser);
+            userservice.Update(userId, founduser);
         }
     }
 }
