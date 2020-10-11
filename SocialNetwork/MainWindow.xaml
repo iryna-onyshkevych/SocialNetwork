@@ -43,6 +43,10 @@
             </MenuItem>
             
             <MenuItem Header="Create Post" >
+                <Label Content="Write a post" Width="74"></Label>
+                <TextBox x:Name="postfield" Margin="0,5,0,0" Width="158" Height="80"/>
+                <Button Click ="Post"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Post</Button>
+
             </MenuItem>
         </Menu>
         <TabControl x:Name="tab1" Background="AliceBlue"   Height="319" Margin="376,50,-0.4,50">

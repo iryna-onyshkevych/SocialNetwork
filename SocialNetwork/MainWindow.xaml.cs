@@ -42,10 +42,12 @@ namespace SocialNetwork
 
         }
         public string ourId = "";//id залогованого користувача
+        public string ourname = "";//id залогованого користувача
+        public string oursurname = "";//id залогованого користувача
         public List<string> ourfollowers = new List<string>();//список читачів залогованого користувача
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
-       
-            private void Info()
+
+        private void Info()
         {
 
             LoginScreen passwordWindow = new LoginScreen();
@@ -85,6 +87,8 @@ namespace SocialNetwork
                     {
                         passcount++;
                         ourId = user.Id;
+                        ourname = user.Name;
+                        oursurname = user.Surname;
                         if (user.Followers.Count != 0)
                         {
                             for (int i = 0; i < user.Followers.Count; i++)
@@ -222,7 +226,7 @@ namespace SocialNetwork
             List<Post> posts = dataContext.Posts;
 
             Post post1 = posts.Where(u => (u.Name == founduser.Name) && (u.Surname == founduser.Surname)).FirstOrDefault();
-            TextBlock newText1 = new TextBlock();
+            TextBox newText1 = new TextBox();
             newText1.TextWrapping = TextWrapping.Wrap;
             tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "Posts" }, Content = newText1 });//додаємо дані внову вкладку
             int amount = 1;
@@ -297,5 +301,33 @@ namespace SocialNetwork
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
         }
+
+        private void Post(object sender, RoutedEventArgs e)
+        {
+            DataContest dataContext = new DataContest();
+            List<Post> posts = dataContext.Posts;
+            Post newpost = new Post();
+            newpost.Like = 0;
+            newpost.Body = postfield.Text;
+            newpost.Name = ourname;
+            newpost.Surname = oursurname;
+            newpost.DateOfPublishing = DateTime.Now;
+            newpost.Id = "5f735b557067227c2a233264";
+            newpost.Comments = new List<Comment> { };
+            //Comment comment2 = new Comment();
+            //comment2.Name = "aa";
+            //comment2.Surname = "aaa";
+            //comment2.CommentBody = "newtext";
+            //newpost.Comments.Add(comment2);
+            PostService postservice = new PostService();
+            postservice.Create(newpost);
+
+        }
+        //private static Random random = new Random();
+        //public static string RandomString(int length)
+        //{
+        //    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //    return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        //}
     }
 }
