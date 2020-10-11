@@ -63,7 +63,7 @@ namespace SocialNetwork
             foreach (var post in SortedList)
             {
 
-                text1.Text += "\n" +  amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
+                text1.Text += "\n" +  amount + " " + "Post" + " likes:" + post.Like.ToString()+ "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
                 foreach (var post1 in post.Comments)
                 {
 
@@ -234,7 +234,7 @@ namespace SocialNetwork
             {
                 if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
                     //text1.Text = "";
-                    newText1.Text += amount + " " + "Post" + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                    newText1.Text += amount + " " + "Post" + " likes:" + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
                     foreach (var post2 in post.Comments)
                     {
                         newText1.Text += "\n" + "Comments:" + "\n";
@@ -252,7 +252,18 @@ namespace SocialNetwork
 
         private void LikePost(object sender, RoutedEventArgs e)
         {
-
+            string postId = "";
+            DataContest dataContext = new DataContest();
+            List<Post> posts = dataContext.Posts;
+           
+           
+            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
+            for (int i = 0; i < SortedList.Count; i++)
+                postId = SortedList[Convert.ToInt32(likespostnumber.Text) - 1].Id;
+            Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
+            newcom.Like++;
+            PostService postservice = new PostService();
+            postservice.Update(postId, newcom);
         }
 
        
@@ -350,6 +361,25 @@ namespace SocialNetwork
         {
             const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+      
+
+        private void Like(object sender, RoutedEventArgs e)
+        {
+            //likepostnumber
+            string postId = "";
+            DataContest dataContext = new DataContest();
+            List<Post> posts = dataContext.Posts;
+
+            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname == usersurname).ToList(); //посортували пости за датою
+            for (int i = 0; i < UsersPost.Count; i++)
+                postId = UsersPost[Convert.ToInt32(likepostnumber.Text) - 1].Id;
+            Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
+            newcom.Like++;
+            PostService postservice = new PostService();
+            postservice.Update(postId, newcom);
+
         }
     }
 }
