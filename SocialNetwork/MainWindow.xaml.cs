@@ -142,10 +142,13 @@ namespace SocialNetwork
         }
 
         public string userId = "";//id знайденого користувача
+        public string username = "";//id знайденого користувача
+        public string usersurname = "";//id знайденого користувача
+
         public List<string> newfollowers = new List<string>();//список читачів знайденого користувача
         public List<string> newfollowing = new List<string>();//список підписок знайденого користувача
         public string emailus = "";//id знайденого користувача
-        private void viewInfo(object sender, RoutedEventArgs e)//інформація про знайденого нами користувача
+        private void ViewInfo(object sender, RoutedEventArgs e)//інформація про знайденого нами користувача
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
@@ -167,6 +170,8 @@ namespace SocialNetwork
                     newText.Text += "Interests: ";
                     userId = user.Id;
                     emailus = user.Email;
+                    username = user.Name;
+                    usersurname = user.Surname;
                     for (int i = 0; i < user.Interests.Count; i++)
                     {
                         newText.Text += user.Interests[i];
@@ -192,7 +197,7 @@ namespace SocialNetwork
 
 
 
-        private void followUser(object sender, RoutedEventArgs e)
+        private void FollowUser(object sender, RoutedEventArgs e)
         {
 
             DataContest dataContext = new DataContest();
@@ -209,7 +214,7 @@ namespace SocialNetwork
             
         }
 
-        private void findPosts(object sender, RoutedEventArgs e)
+        private void FindPosts(object sender, RoutedEventArgs e)
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
@@ -241,25 +246,12 @@ namespace SocialNetwork
             MessageBox.Show("User's posts are opened in new tab");
         }
 
-        private void likePost(object sender, RoutedEventArgs e)
+        private void LikePost(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void addComment(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_Click2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItem_Click1(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void Comment(object sender, RoutedEventArgs e)
         {
@@ -274,13 +266,36 @@ namespace SocialNetwork
             comment1.CommentBody = comment.Text;
             List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
             for (int i = 0; i < SortedList.Count; i++)
-                postId = SortedList[Convert.ToInt32(postnumber.Text)].Id;
+                postId = SortedList[Convert.ToInt32(postnumber.Text)-1].Id;
             Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
             newcom.Comments.Add(comment1);
 
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
 
+        }
+
+    
+
+        private void Commentuserspost(object sender, RoutedEventArgs e)
+        {
+            string postId = "";
+            DataContest dataContext = new DataContest();
+            List<Post> posts = dataContext.Posts;
+            List<User> users = dataContext.Users;
+            User founduser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            Comment comment1 = new Comment();
+            comment1.Name = founduser.Name;
+            comment1.Surname = founduser.Surname;
+            comment1.CommentBody = usercomment.Text;
+            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname ==usersurname).ToList(); //посортували пости за датою
+            for (int i = 0; i < UsersPost.Count; i++)
+                postId = UsersPost[Convert.ToInt32(userpostnumber.Text)-1].Id;
+            Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
+            newcom.Comments.Add(comment1);
+
+            PostService postservice = new PostService();
+            postservice.Update(postId, newcom);
         }
     }
 }
