@@ -1,0 +1,141 @@
+[{
+  "_id": "5f74398b0201dace1cd99af6",
+  "password": "ann2020",
+  "firstName": "Ann",
+  "lastName": "Vyshnia",
+  "email": "ann@gmail.com",
+  "interests": [
+    "programming"
+  ],
+  "followers": [
+    "5f74398b0201dace1cd99af7"
+  ],
+  "following": [
+    "5f74398b0201dace1cd99af5"
+  ]
+},{
+  "_id": "5f74398b0201dace1cd99af7",
+  "password": "q1w2e3r4",
+  "firstName": "Ostap",
+  "lastName": "Kozak",
+  "email": "kozak_ostap@gmail.com",
+  "interests": [
+    "guitar",
+    "swimming",
+    "maths"
+  ],
+  "followers": [
+    "5f74398b0201dace1cd99af5"
+  ],
+  "following": [
+    "5f74398b0201dace1cd99af6"
+  ]
+},{
+  "_id": "5f74398b0201dace1cd99af5",
+  "password": "1111",
+  "firstName": "Mike",
+  "lastName": "Smith",
+  "email": "smith@gmail.com",
+  "interests": [
+    "guitar",
+    "drawing"
+  ],
+  "followers": [
+    "5f74398b0201dace1cd99af6"
+  ],
+  "following": [
+    "5f74398b0201dace1cd99af7"
+  ]
+},{
+  "_id": "5f74398b0201dace1cd19ab1",
+  "password": "34345",
+  "firstName": "Oleh",
+  "lastName": "Bonder",
+  "email": "bonder@gmail.com",
+  "interests": [
+    "guitar"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab2",
+  "password": "m55555",
+  "firstName": "Marta",
+  "lastName": "Five",
+  "email": "martha_5@gmail.com",
+  "interests": [
+    "science"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab3",
+  "password": "oksana020",
+  "firstName": "Oksana",
+  "lastName": "Stepaniv",
+  "email": "stepaniv@gmail.com",
+  "interests": [
+    "cello",
+    "books"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab4",
+  "password": "markomarko",
+  "firstName": "Marko",
+  "lastName": "Markovych",
+  "email": "markovych@gmail.com",
+  "interests": [
+    "video games",
+    "comics"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab5",
+  "password": "kravchenko2019",
+  "firstName": "Andrii",
+  "lastName": "Kravchenko",
+  "email": "kravchenko@gmail.com",
+  "interests": [
+    "cars"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab6",
+  "password": "1324354",
+  "firstName": "Ivan",
+  "lastName": "Martenko",
+  "email": "martenko@gmail.com",
+  "interests": [
+    "dancing",
+    "chemistry"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab7",
+  "password": "nik20",
+  "firstName": "Nik",
+  "lastName": "November",
+  "email": "nik2020@gmail.com",
+  "interests": [
+    "acting",
+    "business"
+  ],
+  "followers": [],
+  "following": []
+},{
+  "_id": "5f74398b0201dace1cd19ab8",
+  "password": "lystokolena",
+  "firstName": "Olena",
+  "lastName": "Lystok",
+  "email": "lystok_olena@gmail.com",
+  "interests": [
+    "phsycology"
+  ],
+  "followers": [],
+  "following": []
+}]

@@ -1,0 +1,253 @@
+[{
+  "_id": "5f74398b0201dace1cd99af9",
+  "body": "Hello",
+  "likes": 1,
+  "comments": [
+    {
+      "body": "hi",
+      "name": "Ostap",
+      "surname": "Kozak"
+    }
+  ],
+  "name": "Ann",
+  "surname": "Vyshnia",
+  "dateofpublishing": {
+    "$date": "2020-10-09T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99af8",
+  "body": "That's my first post",
+  "likes": 1,
+  "comments": [
+    {
+      "body": "Hello",
+      "name": "Mike",
+      "surname": "Smith"
+    }
+  ],
+  "name": "Ann",
+  "surname": "Vyshnia",
+  "dateofpublishing": {
+    "$date": "2020-09-25T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99af7",
+  "body": "Hello, everybody!",
+  "likes": 4,
+  "comments": [
+    {
+      "body": "good evening!",
+      "name": "Ann",
+      "surname": "Vyshnia"
+    }
+  ],
+  "name": "Ostap",
+  "surname": "Kozak",
+  "dateofpublishing": {
+    "$date": "2020-10-05T00:00:00Z"
+  }
+},{
+  "_id": "5f735b557067227c2a233264",
+  "body": "Lets talk about weather",
+  "likes": 1,
+  "comments": [],
+  "name": "Mike",
+  "surname": "Smith",
+  "dateofpublishing": {
+    "$date": "2020-10-11T13:38:32.778Z"
+  }
+},{
+  "_id": "KUMLE10XF2O9KUVGMTV8VHOL",
+  "body": "What're your plans for a weekend?",
+  "likes": 0,
+  "comments": [],
+  "name": "Mike",
+  "surname": "Smith",
+  "dateofpublishing": {
+    "$date": "2020-10-11T14:23:02.995Z"
+  }
+},{
+  "_id": "38ovo4kp2z6wryh7lwfva3ig",
+  "body": "Hello, everybody",
+  "likes": 0,
+  "comments": [],
+  "name": "Mike",
+  "surname": "Smith",
+  "dateofpublishing": {
+    "$date": "2020-10-11T14:31:28.253Z"
+  }
+},{
+  "_id": "3yjwp7hwjyp9tmes8l4dh95i",
+  "body": "How're u doin'?",
+  "likes": 0,
+  "comments": [],
+  "name": "Mike",
+  "surname": "Smith",
+  "dateofpublishing": {
+    "$date": "2020-10-11T14:33:52.168Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab1",
+  "body": "Hello! What do you like doing in free time? ",
+  "likes": 0,
+  "comments": [],
+  "name": "Marta",
+  "surname": "Five",
+  "dateofpublishing": {
+    "$date": "2020-10-07T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab2",
+  "body": "Hello! Please, write my your favourite book's name ",
+  "likes": 1,
+  "comments": [],
+  "name": "Oksana",
+  "surname": "Stepaniv",
+  "dateofpublishing": {
+    "$date": "2020-10-09T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab3",
+  "body": "Hello! Who else is going to the club tonight?",
+  "likes": 3,
+  "comments": [],
+  "name": "Oleh",
+  "surname": "Bonder",
+  "dateofpublishing": {
+    "$date": "2020-10-09T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab4",
+  "body": "Hi! Lets go to a swimming pool today!",
+  "likes": 3,
+  "comments": [
+    {
+      "body": "Yes",
+      "name": "Mike",
+      "surname": "Smith"
+    }
+  ],
+  "name": "Ostap",
+  "surname": "Kozak",
+  "dateofpublishing": {
+    "$date": "2020-10-10T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab5",
+  "body": "Hello! Is there anybody interested in psychology?",
+  "likes": 1,
+  "comments": [
+    {
+      "body": "No(",
+      "name": "Mike",
+      "surname": "Smith"
+    }
+  ],
+  "name": "Olena",
+  "surname": "Lystok",
+  "dateofpublishing": {
+    "$date": "2020-10-09T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab6",
+  "body": "Please, send me materials to prepare for a maths test!!!",
+  "likes": 1,
+  "comments": [],
+  "name": "Marko",
+  "surname": "Markovych",
+  "dateofpublishing": {
+    "$date": "2020-10-09T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab7",
+  "body": "Hi. What's up?",
+  "likes": 1,
+  "comments": [],
+  "name": "Andrii",
+  "surname": "Kravchenko",
+  "dateofpublishing": {
+    "$date": "2020-10-04T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab8",
+  "body": "Today is a wonderful day",
+  "likes": 1,
+  "comments": [],
+  "name": "Nik",
+  "surname": "November",
+  "dateofpublishing": {
+    "$date": "2020-10-04T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ab9",
+  "body": "Hello!",
+  "likes": 1,
+  "comments": [
+    {
+      "body": "Hello!",
+      "name": "Mike",
+      "surname": "Smith"
+    }
+  ],
+  "name": "Ivan",
+  "surname": "Martenko",
+  "dateofpublishing": {
+    "$date": "2020-10-03T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ac6",
+  "body": "Finally, it's raining!",
+  "likes": 1,
+  "comments": [],
+  "name": "Ivan",
+  "surname": "Martenko",
+  "dateofpublishing": {
+    "$date": "2020-09-15T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ag3",
+  "body": "Today is my birthday!",
+  "likes": 8,
+  "comments": [
+    {
+      "body": "Congrats!",
+      "name": "Mike",
+      "surname": "Smith"
+    }
+  ],
+  "name": "Ostap",
+  "surname": "Kozak",
+  "dateofpublishing": {
+    "$date": "2020-09-25T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ag4",
+  "body": "Is there anyone near Rynok Square?",
+  "likes": 4,
+  "comments": [],
+  "name": "Ann",
+  "surname": "Vyshnia",
+  "dateofpublishing": {
+    "$date": "2020-10-11T00:00:00Z"
+  }
+},{
+  "_id": "5f74398b0201dace1cd99ag5",
+  "body": "Today will be my first performance!",
+  "likes": 1,
+  "comments": [],
+  "name": "Oksana",
+  "surname": "Stepaniv",
+  "dateofpublishing": {
+    "$date": "2020-10-10T00:00:00Z"
+  }
+},{
+  "_id": "etztbiraq5vrulp8jo0rzuza",
+  "body": "Finally!",
+  "likes": 0,
+  "comments": [],
+  "name": "Mike",
+  "surname": "Smith",
+  "dateofpublishing": {
+    "$date": "2020-10-12T11:06:11.702Z"
+  }
+}]

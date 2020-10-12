@@ -212,37 +212,27 @@ namespace SocialNetwork
 
         }
 
-        private void FindPosts(object sender, RoutedEventArgs e)
+        private void UnfollowUser(object sender, RoutedEventArgs e)
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
-            List<Post> posts = dataContext.Posts;
-
-            Post post1 = posts.Where(u => (u.Name == founduser.Name) && (u.Surname == founduser.Surname)).FirstOrDefault();
-            TextBox newText1 = new TextBox();
-            newText1.TextWrapping = TextWrapping.Wrap;
-            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "Posts" }, Content = newText1 });//додаємо дані внову вкладку
-            int amount = 1;
-            foreach (var post in posts)
+            User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            bool f = ourfollowing.Any(x => x == founduser.Id);
+            if (f == true)
             {
-                if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
-                    //text1.Text = "";
-                    newText1.Text += "\n" +"№ " + amount + " " + "Post" + " likes: " + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
-                    foreach (var post2 in post.Comments)
-                    {
-                        newText1.Text += "Comments:" + "\n";
-                        newText1.Text += post2.CommentBody+ "\n" + post2.Name + " " + post2.Surname + "\n";
+                ouruser.Following.Remove(founduser.Id);
+                founduser.Followers.Remove(ouruser.Id);
 
-                    }
-                    newText1.Text += "\n";
-                    amount++;
-                }
-
+                UserService userservice = new UserService();
+                userservice.Update(ourId, ouruser);
+                userservice.Update(userId, founduser);
+                MessageBox.Show("Unfollowed!");
             }
-            MessageBox.Show("User's posts are opened in new tab");
+            else
+                MessageBox.Show("Error! You have already unfollowed " + username + " " + usersurname);
+            UpdateFriends();
         }
-
         private void LikePost(object sender, RoutedEventArgs e)
         {
             string postId = "";
@@ -299,7 +289,7 @@ namespace SocialNetwork
             comment1.Name = founduser.Name;
             comment1.Surname = founduser.Surname;
             comment1.CommentBody = usercomment.Text;
-            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname ==usersurname).ToList(); //посортували пости за датою
+            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname ==usersurname).ToList(); 
             for (int i = 0; i < UsersPost.Count; i++)
                 postId = UsersPost[Convert.ToInt32(userpostnumber.Text)-1].Id;
             Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
@@ -347,6 +337,7 @@ namespace SocialNetwork
             PostService postservice = new PostService();
             postservice.Create(newpost);
             MessageBox.Show("Post was created!");
+            UpdateStream();
 
         }
         private static Random random = new Random();
@@ -365,7 +356,7 @@ namespace SocialNetwork
             DataContest dataContext = new DataContest();
             List<Post> posts = dataContext.Posts;
 
-            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname == usersurname).ToList(); //посортували пости за датою
+            List<Post> UsersPost = posts.Where(u => u.Name == username && u.Surname == usersurname).ToList();
             for (int i = 0; i < UsersPost.Count; i++)
                 postId = UsersPost[Convert.ToInt32(likepostnumber.Text) - 1].Id;
             Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
@@ -375,26 +366,37 @@ namespace SocialNetwork
             MessageBox.Show("You liked it!");
         }
 
-        private void UnfollowUser(object sender, RoutedEventArgs e)
+       
+        private void FindPosts(object sender, RoutedEventArgs e)
         {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
-            User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
-            bool f = ourfollowing.Any(x => x == founduser.Id);
-            if (f == true)
-            {
-                ouruser.Following.Remove(founduser.Id);
-                founduser.Followers.Remove(ouruser.Id);
+            List<Post> posts = dataContext.Posts;
 
-                UserService userservice = new UserService();
-                userservice.Update(ourId, ouruser);
-                userservice.Update(userId, founduser);
-                MessageBox.Show("Unfollowed!");
+            Post post1 = posts.Where(u => (u.Name == founduser.Name) && (u.Surname == founduser.Surname)).FirstOrDefault();
+            TextBox newText1 = new TextBox();
+            newText1.TextWrapping = TextWrapping.Wrap;
+            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "Posts" }, Content = newText1 });//додаємо дані внову вкладку
+            int amount = 1;
+            foreach (var post in posts)
+            {
+                if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname))
+                {
+                    //text1.Text = "";
+                    newText1.Text += "\n" + "№ " + amount + " " + "Post" + " likes: " + post.Like.ToString() + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
+                    foreach (var post2 in post.Comments)
+                    {
+                        newText1.Text += "Comments:" + "\n";
+                        newText1.Text += post2.CommentBody + "\n" + post2.Name + " " + post2.Surname + "\n";
+
+                    }
+                    newText1.Text += "\n";
+                    amount++;
+                }
+
             }
-            else
-                MessageBox.Show("Error! You have already unfollowed " + username + " " + usersurname);
-            UpdateFriends();
+            MessageBox.Show("User's posts are opened in new tab");
         }
 
         private void Exit(object sender, RoutedEventArgs e)
