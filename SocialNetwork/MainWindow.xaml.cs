@@ -46,7 +46,7 @@ namespace SocialNetwork
         public string oursurname = "";//id залогованого користувача
         public List<string> ourfollowers = new List<string>();//список читачів залогованого користувача
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
-
+      
         private void Info()
         {
 
@@ -63,7 +63,7 @@ namespace SocialNetwork
             foreach (var post in SortedList)
             {
 
-                text1.Text += "\n" +  amount + " " + "Post" + " likes:" + post.Like.ToString()+ "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
+                text1.Text += "\n" +"№ " +  amount + " " + "Post" + " likes: " + post.Like.ToString()+ "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
                 foreach (var post1 in post.Comments)
                 {
 
@@ -95,23 +95,17 @@ namespace SocialNetwork
                             {
                                 ourfollowers.Add(user.Followers[i]);//шукаємо читачів залогованого користувача
                             }
-                        }
-
-
-                        else
-                        {
                             for (int i = 0; i < user.Following.Count; i++)
                             {
                                 ourfollowing.Add(user.Following[i]);//шукаємо підписки залогованого користувача
                             }
                         }
+
                     }
                 }
                 if (passcount == 1)//пароль співпав з одним із паролів в бд
                 {
                     MessageBox.Show("Autherisation is passed");
-
-
                 }
                 else
                 {
@@ -134,7 +128,7 @@ namespace SocialNetwork
                     MessageBox.Show("Welcome, "+user.Name+ " " +user.Surname+ "!");
                 }
             }
-            
+
         }
 
 
@@ -212,14 +206,19 @@ namespace SocialNetwork
             List<User> users = dataContext.Users;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            bool f = ourfollowing.Any(x => x == founduser.Id);
+            if (f == false)
+            {
+                ouruser.Following.Add(founduser.Id);
+                founduser.Followers.Add(ouruser.Id);
 
-            ouruser.Following.Add(founduser.Id);
-            founduser.Followers.Add(ouruser.Id);
-
-            UserService userservice = new UserService();
-            userservice.Update(ourId, ouruser);
-            userservice.Update(userId, founduser);
-
+                UserService userservice = new UserService();
+                userservice.Update(ourId, ouruser);
+                userservice.Update(userId, founduser);
+                MessageBox.Show("Followed!");
+            }
+            else
+                MessageBox.Show("Error! You have already followed " + username + " " + usersurname);
 
         }
 
@@ -239,7 +238,7 @@ namespace SocialNetwork
             {
                 if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
                     //text1.Text = "";
-                    newText1.Text += amount + " " + "Post" + " likes:" + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                    newText1.Text += "№ "+ amount + " " + "Post" + " likes: " + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
                     foreach (var post2 in post.Comments)
                     {
                         newText1.Text += "\n" + "Comments:" + "\n";
@@ -387,13 +386,19 @@ namespace SocialNetwork
             List<User> users = dataContext.Users;
             User founduser = users.Where(u => u.Id == userId).FirstOrDefault();
             User ouruser = users.Where(u => u.Id == ourId).FirstOrDefault();
+            bool f = ourfollowing.Any(x => x == founduser.Id);
+            if (f == true)
+            {
+                ouruser.Following.Remove(founduser.Id);
+                founduser.Followers.Remove(ouruser.Id);
 
-            ouruser.Following.Remove(founduser.Id);
-            founduser.Followers.Remove(ouruser.Id);
-
-            UserService userservice = new UserService();
-            userservice.Update(ourId, ouruser);
-            userservice.Update(userId, founduser);
+                UserService userservice = new UserService();
+                userservice.Update(ourId, ouruser);
+                userservice.Update(userId, founduser);
+                MessageBox.Show("Unfollowed!");
+            }
+            else
+                MessageBox.Show("Error! You have already unfollowed " + username + " " + usersurname);
         }
     }
 }

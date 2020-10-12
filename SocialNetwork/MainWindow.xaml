@@ -5,20 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SocialNetwork"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF7FEFF6" OpacityMask="#FFB2F0FF" Icon="icon.jpg">
-    <Window.BorderBrush>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="Black" Offset="0"/>
-            <GradientStop Color="#FFADECFF" Offset="1"/>
-        </LinearGradientBrush>
-    </Window.BorderBrush>
+        Title="MainWindow" Height="450" Width="800" Icon="icon.jpg">
+   
     <Grid x:Name="grid">
         <Grid.Background>
             <ImageBrush ImageSource="image.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="image.jpg" Stretch="UniformToFill"/>
-        </Grid.Background>-->
+       
         <Menu x:Name="tab"  Height="35" VerticalAlignment="Top" Background  ="Pink">
             <MenuItem Header="Find" Click="MenuItem_Click">
                 <Label Content="Enter Name"></Label>
@@ -35,7 +28,7 @@
                     <Button Click ="LikePost" Margin="5" Background="LightPink">Like</Button>
                 </StackPanel>
                 <MenuItem Header="Comment" Margin="31,5,0,0" Height="32" Background="AliceBlue">
-                    <Label Content="Enter the number of a post"></Label>
+                    <Label Content="Enter the number (№) of a post"></Label>
                     <TextBox x:Name="userpostnumber" Width="157" Height="35" >
                     </TextBox>
                     <Label Content="Write a comment"></Label>
@@ -44,14 +37,14 @@
                     <Button Click ="Commentuserspost"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Comment</Button>
                 </MenuItem>
                 <MenuItem Header="Like" Margin="31,5,0,0" Height="32" Background="LightPink" >
-                    <Label Content="Enter the number of a post"></Label>
+                    <Label Content="Enter the number (№) of a post"></Label>
                     <TextBox x:Name="likepostnumber" Width="157" Height="35" >
                     </TextBox>
                     <Button Click ="Like"  Height="31" Width="61" Margin="95,10,0,5" Background="AliceBlue">Like</Button>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Comment Post" >
-                <Label Content="Enter the number of a post"></Label>
+                <Label Content="Enter the number (№) of a post"></Label>
                 <TextBox x:Name="postnumber" Width="157" Height="35" >
                 </TextBox>
                 <Label Content="Write a comment"></Label>
@@ -67,7 +60,7 @@
 
             </MenuItem>
             <MenuItem Header="Like"  Height="32" >
-                <Label Content="Enter the number of a post"></Label>
+                <Label Content="Enter the number (№) of a post"></Label>
                 <TextBox x:Name="likespostnumber" Margin="5,0" Width="143" Height="35" >
                 </TextBox>
                 <Button Click ="LikePost"  Height="31" Width="61" Margin="95,10,0,5" Background="AliceBlue">Like</Button>
