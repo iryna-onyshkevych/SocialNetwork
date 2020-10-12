@@ -13,7 +13,7 @@
         </Grid.Background>
        
         <Menu x:Name="tab"  Height="35" VerticalAlignment="Top" Background  ="Pink">
-            <MenuItem Header="Find" Click="MenuItem_Click">
+            <MenuItem Header="Find">
                 <Label Content="Enter Name"></Label>
                 <TextBox x:Name="Firstname" Width="259" Height="35" >
                 </TextBox>
@@ -21,11 +21,14 @@
                 <TextBox x:Name="Lastname" Width="259" Height="35" >
                 </TextBox>
                 <Button Click="ViewInfo" Margin="5" Height="31" Width="61" Background="LightCyan">FindUser</Button>
-                <StackPanel Orientation="Horizontal">
-                    <Button Click="FindPosts" Margin="5" Background="LightPink">SeePosts</Button>
-                    <Button Click ="FollowUser" Margin="5" Background="LightPink">Follow</Button>
-                    <Button Click ="UnfollowUser" Margin="5" Background="LightPink">Unfollow</Button>
-                    <Button Click ="LikePost" Margin="5" Background="LightPink">Like</Button>
+                
+            </MenuItem>
+            <MenuItem Header="Founded User">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Button Click="FindPosts" Margin="5" Background="LightCyan">SeePosts</Button>
+                    <Button Click ="FollowUser" Margin="5" Background="LightCyan">Follow</Button>
+                    <Button Click ="UnfollowUser" Margin="5" Background="LightCyan">Unfollow</Button>
+                    <Button Click ="LikePost" Margin="5" Background="LightCyan">Like</Button>
                 </StackPanel>
                 <MenuItem Header="Comment" Margin="31,5,0,0" Height="32" Background="AliceBlue">
                     <Label Content="Enter the number (№) of a post"></Label>
@@ -36,34 +39,34 @@
                     </TextBox>
                     <Button Click ="Commentuserspost"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Comment</Button>
                 </MenuItem>
-                <MenuItem Header="Like" Margin="31,5,0,0" Height="32" Background="LightPink" >
+                <MenuItem Header="Like" Margin="31,5,0,0" Height="32" Background="Pink" >
                     <Label Content="Enter the number (№) of a post"></Label>
                     <TextBox x:Name="likepostnumber" Width="157" Height="35" >
                     </TextBox>
                     <Button Click ="Like"  Height="31" Width="61" Margin="95,10,0,5" Background="AliceBlue">Like</Button>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Comment Post" >
+            <MenuItem Header="Comment Post in Stream" >
                 <Label Content="Enter the number (№) of a post"></Label>
                 <TextBox x:Name="postnumber" Width="157" Height="35" >
                 </TextBox>
                 <Label Content="Write a comment"></Label>
                 <TextBox x:Name="comment" Width="157" Height="65" >
                 </TextBox>
-                <Button Click ="Comment"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Comment</Button>
+                <Button Click ="Comment"  Height="31" Width="61" Margin="95,10,0,5" Background="LightCyan">Comment</Button>
             </MenuItem>
 
             <MenuItem Header="Create Post" >
                 <Label Content="Write a post" Width="74"></Label>
                 <TextBox x:Name="postfield" Margin="0,5,0,0" Width="158" Height="80"/>
-                <Button Click ="Post"  Height="31" Width="61" Margin="95,10,0,5" Background="LightPink">Post</Button>
+                <Button Click ="Post"  Height="31" Width="61" Margin="95,10,0,5" Background="LightCyan">Post</Button>
 
             </MenuItem>
-            <MenuItem Header="Like"  Height="32" >
+            <MenuItem Header="Like  in Stream"  Height="32" >
                 <Label Content="Enter the number (№) of a post"></Label>
                 <TextBox x:Name="likespostnumber" Margin="5,0" Width="143" Height="35" >
                 </TextBox>
-                <Button Click ="LikePost"  Height="31" Width="61" Margin="95,10,0,5" Background="AliceBlue">Like</Button>
+                <Button Click ="LikePost"  Height="31" Width="61" Margin="95,10,0,5" Background="LightCyan">Like</Button>
             </MenuItem>
             <MenuItem Header="Exit" Click="Exit" >
             </MenuItem>

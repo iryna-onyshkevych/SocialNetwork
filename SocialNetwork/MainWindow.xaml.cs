@@ -32,38 +32,35 @@ namespace SocialNetwork
 
     public partial class MainWindow : Window
     {
-        
+
 
         public MainWindow()
         {
-        
+
             InitializeComponent();
             Info();
-
         }
         public string ourId = "";//id залогованого користувача
         public string ourname = "";//id залогованого користувача
         public string oursurname = "";//id залогованого користувача
         public List<string> ourfollowers = new List<string>();//список читачів залогованого користувача
         public List<string> ourfollowing = new List<string>();//список підписок залогованого користувача
-      
-        private void Info()
-        {
+        public TextBox text1 = new TextBox();
 
-            LoginScreen passwordWindow = new LoginScreen();
+        private void UpdateStream()
+        {
             DataContest dataContext = new DataContest();
             List<User> users = dataContext.Users;
             List<Post> posts = dataContext.Posts;
             List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
-           
             TextBox text1 = new TextBox();
             text1.TextWrapping = TextWrapping.Wrap;
             int amount = 1;
-           
+
             foreach (var post in SortedList)
             {
 
-                text1.Text += "\n" +"№ " +  amount + " " + "Post" + " likes: " + post.Like.ToString()+ "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
+                text1.Text += "\n" + "№ " + amount + " " + "Post" + " likes: " + post.Like.ToString() + "\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
                 foreach (var post1 in post.Comments)
                 {
 
@@ -75,9 +72,37 @@ namespace SocialNetwork
                 amount++;
 
             }
-           
-            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку
 
+            tab1.Items.Add(new TabItem { Header = new TextBlock { Text = "All Posts" }, Content = text1 });//додаємо дані внову вкладку\n";
+            amount++;
+
+        }
+        private void UpdateFriends()
+        {
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+            User user = users.Where(u => u.Id == ourId).FirstOrDefault();
+            if (user.Followers.Count != 0)
+            {
+                for (int i = 0; i < user.Followers.Count; i++)
+                {
+                    ourfollowers.Add(user.Followers[i]);//шукаємо читачів залогованого користувача
+                }
+                for (int i = 0; i < user.Following.Count; i++)
+                {
+                    ourfollowing.Add(user.Following[i]);//шукаємо підписки залогованого користувача
+                }
+            }
+        }
+        
+        private void Info()
+        {
+
+            LoginScreen passwordWindow = new LoginScreen();
+            DataContest dataContext = new DataContest();
+            List<User> users = dataContext.Users;
+
+            UpdateStream();
             if (passwordWindow.ShowDialog() == true)
             {
                 foreach (var user in users)
@@ -99,8 +124,8 @@ namespace SocialNetwork
                             }
                         }
                         MessageBox.Show("Autherisation is passed");
+                        MessageBox.Show("Welcome, " + ourname + " " + oursurname + "!");
                     }
-                   
                 }
             }
             else
@@ -108,31 +133,7 @@ namespace SocialNetwork
                 MessageBox.Show("Password or email is incorrect");
                 MessageBox.Show("Autherisation is not passed");
                 this.Close();
-
             }
-            foreach (var user in users)
-            {
-                if (user.Id == ourId)
-                {
-
-                    ourId = user.Id;
-                    MessageBox.Show("Welcome, "+user.Name+ " " +user.Surname+ "!");
-                }
-            }
-
-        }
-
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //LoginScreen taskWindow = new LoginScreen();
-            //taskWindow.Show();
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         public string userId = "";//id знайденого користувача
@@ -187,9 +188,6 @@ namespace SocialNetwork
 
 
         }
-
-
-
         private void FollowUser(object sender, RoutedEventArgs e)
         {
 
@@ -210,6 +208,7 @@ namespace SocialNetwork
             }
             else
                 MessageBox.Show("Error! You have already followed " + username + " " + usersurname);
+            UpdateFriends();
 
         }
 
@@ -229,16 +228,15 @@ namespace SocialNetwork
             {
                 if ((post.Name == founduser.Name) && (post.Surname == founduser.Surname)){
                     //text1.Text = "";
-                    newText1.Text += "№ "+ amount + " " + "Post" + " likes: " + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + " ";
+                    newText1.Text += "\n" +"№ " + amount + " " + "Post" + " likes: " + post.Like.ToString()+"\n" + post.Name + " " + post.Surname + "\n" + post.Body + "\n";
                     foreach (var post2 in post.Comments)
                     {
-                        newText1.Text += "\n" + "Comments:" + "\n";
+                        newText1.Text += "Comments:" + "\n";
                         newText1.Text += post2.CommentBody+ "\n" + post2.Name + " " + post2.Surname + "\n";
-                        newText1.Text += "\n";
 
                     }
+                    newText1.Text += "\n";
                     amount++;
-
                 }
 
             }
@@ -252,7 +250,7 @@ namespace SocialNetwork
             List<Post> posts = dataContext.Posts;
            
            
-            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); //посортували пости за датою
+            List<Post> SortedList = posts.OrderByDescending(o => o.DateOfPublishing).ToList(); 
             for (int i = 0; i < SortedList.Count; i++)
                 postId = SortedList[Convert.ToInt32(likespostnumber.Text) - 1].Id;
             Post newcom = posts.Where(u => u.Id == postId).FirstOrDefault();
@@ -310,6 +308,7 @@ namespace SocialNetwork
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
             MessageBox.Show("Comment was added!");
+            UpdateStream();
         }
 
         private void Post(object sender, RoutedEventArgs e)
@@ -343,7 +342,6 @@ namespace SocialNetwork
 
 
             }
-
             newpost.Id = newid;
             newpost.Comments = new List<Comment> { };
             PostService postservice = new PostService();
@@ -396,6 +394,7 @@ namespace SocialNetwork
             }
             else
                 MessageBox.Show("Error! You have already unfollowed " + username + " " + usersurname);
+            UpdateFriends();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
