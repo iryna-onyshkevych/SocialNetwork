@@ -65,6 +65,8 @@
                 </TextBox>
                 <Button Click ="LikePost"  Height="31" Width="61" Margin="95,10,0,5" Background="AliceBlue">Like</Button>
             </MenuItem>
+            <MenuItem Header="Exit" Click="Exit" >
+            </MenuItem>
         </Menu>
         <TabControl x:Name="tab1" Background="AliceBlue"   Height="319" Margin="376,50,-0.4,50"/>
     </Grid>

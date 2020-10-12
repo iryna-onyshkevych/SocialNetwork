@@ -80,12 +80,10 @@ namespace SocialNetwork
 
             if (passwordWindow.ShowDialog() == true)
             {
-                int passcount = 0;//лічильник для перевірки на правильність пароля
                 foreach (var user in users)
                 {
                     if ((user.Password == passwordWindow.Password)&&(user.Email== passwordWindow.Email))//якщо введений пароль є серед паролів користувачів
                     {
-                        passcount++;
                         ourId = user.Id;
                         ourname = user.Name;
                         oursurname = user.Surname;
@@ -100,21 +98,14 @@ namespace SocialNetwork
                                 ourfollowing.Add(user.Following[i]);//шукаємо підписки залогованого користувача
                             }
                         }
-
+                        MessageBox.Show("Autherisation is passed");
                     }
-                }
-                if (passcount == 1)//пароль співпав з одним із паролів в бд
-                {
-                    MessageBox.Show("Autherisation is passed");
-                }
-                else
-                {
-                    MessageBox.Show("Password or email is incorrect");
-                    this.Close();
+                   
                 }
             }
             else
             {
+                MessageBox.Show("Password or email is incorrect");
                 MessageBox.Show("Autherisation is not passed");
                 this.Close();
 
@@ -268,9 +259,11 @@ namespace SocialNetwork
             newcom.Like++;
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
+            MessageBox.Show("You liked it!");
+
         }
 
-       
+
 
         private void Comment(object sender, RoutedEventArgs e)
         {
@@ -291,10 +284,11 @@ namespace SocialNetwork
 
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
+            MessageBox.Show("Comment was added!");
 
         }
 
-    
+
 
         private void Commentuserspost(object sender, RoutedEventArgs e)
         {
@@ -315,6 +309,7 @@ namespace SocialNetwork
 
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
+            MessageBox.Show("Comment was added!");
         }
 
         private void Post(object sender, RoutedEventArgs e)
@@ -353,6 +348,7 @@ namespace SocialNetwork
             newpost.Comments = new List<Comment> { };
             PostService postservice = new PostService();
             postservice.Create(newpost);
+            MessageBox.Show("Post was created!");
 
         }
         private static Random random = new Random();
@@ -362,10 +358,11 @@ namespace SocialNetwork
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-      
-        
+
+       
         private void Like(object sender, RoutedEventArgs e)
         {
+            
             string postId = "";
             DataContest dataContext = new DataContest();
             List<Post> posts = dataContext.Posts;
@@ -377,7 +374,7 @@ namespace SocialNetwork
             newcom.Like++;
             PostService postservice = new PostService();
             postservice.Update(postId, newcom);
-
+            MessageBox.Show("You liked it!");
         }
 
         private void UnfollowUser(object sender, RoutedEventArgs e)
@@ -399,6 +396,20 @@ namespace SocialNetwork
             }
             else
                 MessageBox.Show("Error! You have already unfollowed " + username + " " + usersurname);
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    System.Windows.Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+
         }
     }
 }
