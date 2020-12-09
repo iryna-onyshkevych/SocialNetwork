@@ -28,11 +28,11 @@ namespace DAL.Services
             graphRepository = new Graph();
         }
         //
-        public bool CheckPassword(string nickname, string password)
+        public bool CheckPassword(string userlog, string password)
         {
 
             User user = new User();
-            user = repository.GetUser(nickname);
+            user = repository.GetUser(userlog);
             if (user != null)
             {
                 if (user.Password == GetHashStringSHA256(password))
@@ -60,13 +60,13 @@ namespace DAL.Services
             return result;
         }
 
-        public bool CheckIndentityOfUserlog(string nickname)
+        public bool CheckIndentityOfUserlog(string userlog)
         {
             List<User> users = new List<User>();
             users = repository.GetUsers();
             foreach (var elem in users)
             {
-                if (elem.Userlog == nickname)
+                if (elem.Userlog == userlog)
                 {
                     return false;
                 }
@@ -74,7 +74,7 @@ namespace DAL.Services
 
             return true;
         }
-        //
+      
         public void UserlogWrite(string Userlog)
         {
             var p = new UserLog();
@@ -151,20 +151,7 @@ namespace DAL.Services
                 return true;
             }
         }
-        ////
-        //public bool UpdatePassword(string oldpasssword, string newpassword)
-        //{
-        //    if (CheckPassword(NickNameRead(), (oldpasssword)))
-        //    {
-        //        repository.UpdateField(NickNameRead(), "Password", GetHashStringSHA256(newpassword));
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-
-        //}
+       
 
         public bool UpdateField(string userlog, string fieldToEdit, string fieldValue)
         {
@@ -331,7 +318,7 @@ namespace DAL.Services
 
         }
 
-        public List<string> GetConnectingPaths(string nickname)
+        public List<string> GetConnectingPaths(string userlog)
         {
             try
             {
@@ -341,7 +328,7 @@ namespace DAL.Services
                 user1 = GetUser(UserlogRead());
 
                 User user2 = new User();
-                user2 = GetUser(nickname);
+                user2 = GetUser(userlog);
 
                 var temp = graphRepository.ConnectingPaths(new Person()
                 {
@@ -371,7 +358,7 @@ namespace DAL.Services
             }
         }
 
-        public string GetConnectingPathsNumber(string nickname)
+        public string GetConnectingPathsNumber(string userlog)
         {
             try
             {
@@ -381,7 +368,7 @@ namespace DAL.Services
                 user1 = GetUser(UserlogRead());
 
                 User user2 = new User();
-                user2 = GetUser(nickname);
+                user2 = GetUser(userlog);
 
                 var temp = graphRepository.ConnectingPaths(new Person()
                 {
@@ -425,16 +412,16 @@ namespace DAL.Services
             }
         }
 
-        public void AddFollower(string nickname, string newFollower)
+        public void AddFollower(string userlog, string newFollower)
         {
-            repository.addFollower(nickname, newFollower);
+            repository.addFollower(userlog, newFollower);
         }
 
-        public void UnFollow(string nickname, string follower)
+        public void UnFollow(string userlog, string follower)
         {
-            repository.unFollow(nickname, follower);
+            repository.unFollow(userlog, follower);
             User user1 = new User();
-            user1 = GetUser(nickname);
+            user1 = GetUser(userlog);
 
             User user2 = new User();
             user2 = GetUser(follower);
@@ -454,12 +441,12 @@ namespace DAL.Services
             });
         }
 
-        public void AddFollowing(string nickname, string newFollowing)
+        public void AddFollowing(string userlog, string newFollowing)
         {
-            repository.addFollowing(nickname, newFollowing);
+            repository.addFollowing(userlog, newFollowing);
 
             User user1 = new User();
-            user1 = GetUser(nickname);
+            user1 = GetUser(userlog);
 
             User user2 = new User();
             user2 = GetUser(newFollowing);
