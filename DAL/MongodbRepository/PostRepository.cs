@@ -24,24 +24,24 @@ namespace DAL.Repository
         {
             return "post";
         }
-        public void AddLike(string UserNickname, ObjectId postId)
+        public void AddLike(string userslog, ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
             var update = Builders<Post>.Update.Inc("Like", 1);
             collection.UpdateOne(filter, update);
 
-            update = Builders<Post>.Update.Push("PersonsWhoLike", UserNickname);
+            update = Builders<Post>.Update.Push("PersonsWhoLike", userslog);
             collection.UpdateOne(filter, update);
 
         }
 
-        public void DismissLike(string UserNickname, ObjectId postId)
+        public void DismissLike(string userslog, ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
             var update = Builders<Post>.Update.Inc("Like", -1);
             collection.UpdateOne(filter, update);
 
-            update = Builders<Post>.Update.Pull("PersonsWhoLike", UserNickname);
+            update = Builders<Post>.Update.Pull("PersonsWhoLike", userslog);
             collection.UpdateOne(filter, update);
         }
     
