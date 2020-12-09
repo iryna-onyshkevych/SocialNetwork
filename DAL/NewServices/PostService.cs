@@ -57,7 +57,7 @@ namespace DAL.Services
         }
        
 
-        public bool CheckIfUserLikePost(string UserNickname, ObjectId postId)
+        public bool CheckIfUserLikePost(string userslog, ObjectId postId)
         {
 
             Post post = new Post();
@@ -66,9 +66,9 @@ namespace DAL.Services
             {
                 if (post.PersonsWhoLike != null && post.PersonsWhoLike.Count > 0)
                 {
-                    foreach (var nick in post.PersonsWhoLike)
+                    foreach (var log in post.PersonsWhoLike)
                     {
-                        if (nick == UserNickname)
+                        if (log == userslog)
                         {
                             return true;
                         }
@@ -82,11 +82,11 @@ namespace DAL.Services
         }
        
 
-        public void AddLike(string UserNickname, ObjectId postId)
+        public void AddLike(string userslog, ObjectId postId)
         {
             try
             {
-                repository.AddLike(UserNickname, postId);
+                repository.AddLike(userslog, postId);
             }
             catch
             {
@@ -164,12 +164,12 @@ namespace DAL.Services
 
         }
 
-        public List<Post> GetPosts(string nickname)
+        public List<Post> GetPosts(string userlog)
         {
             List<Post> posts = new List<Post>();
             try
             {
-                posts = repository.GetPosts(userRepository.GetUserId(nickname));
+                posts = repository.GetPosts(userRepository.GetUserId(userlog));
                 return posts;
             }
             catch
