@@ -16,7 +16,7 @@ namespace DAL.Repository
         IMongoCollection<Post> collection;
         public PostRepository()
         {
-            database = MongoConfigManager.GetDefaultDatabase();
+            database = Program.GetDefaultDatabase();
             collection = database.GetCollection<Post>(GetTableName());
         }
 
@@ -24,24 +24,6 @@ namespace DAL.Repository
         {
             return "post";
         }
-
-        public void Add(Post post) =>
-          collection.InsertOne(post);
-
-        public void Add(IEnumerable<Post> posts) =>
-            collection.InsertMany(posts);
-
-        public void Update(ObjectId id, Post post) =>
-            collection.ReplaceOne(p => p.Id == id, post);
-
-        public void UpdatePost(ObjectId postId, string newTxt)
-        {
-            var filter = Builders<Post>.Filter.Eq("_id", postId);
-            var update = Builders<Post>.Update.Set("Text", newTxt);
-            collection.UpdateOne(filter, update);
-
-        }
-
         public void AddLike(string UserNickname, ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
@@ -62,43 +44,41 @@ namespace DAL.Repository
             update = Builders<Post>.Update.Pull("PersonsWhoLike", UserNickname);
             collection.UpdateOne(filter, update);
         }
-        //
-        public void AddComment(Comment comment, ObjectId postId)
+    
+        public void AddComment(Postcomments comment, ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
             var update = Builders<Post>.Update.Push("Comments", comment);
             collection.UpdateOne(filter, update);
         }
 
-        public void DeleteComment(Comment comment, ObjectId postId)
+        public void Add(Post post) =>
+          collection.InsertOne(post);
+
+        public void Add(IEnumerable<Post> posts) =>
+            collection.InsertMany(posts);
+
+        public void Update(ObjectId id, Post post) =>
+            collection.ReplaceOne(p => p.Id == id, post);
+
+        public void UpdatePost(ObjectId postId, string newTxt)
+        {
+            var filter = Builders<Post>.Filter.Eq("_id", postId);
+            var update = Builders<Post>.Update.Set("Text", newTxt);
+            collection.UpdateOne(filter, update);
+
+        }
+
+     
+        public void DeleteComment(Postcomments comment, ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
             var update = Builders<Post>.Update.Pull("Comments", comment);
             collection.UpdateOne(filter, update);
         }
-        //
-        public void AddDislike(string UserNickname, ObjectId postId)
-        {
-            var filter = Builders<Post>.Filter.Eq("_id", postId);
-            var update = Builders<Post>.Update.Inc("DisLike", 1);
-            collection.UpdateOne(filter, update);
-
-            update = Builders<Post>.Update.Push("PersonsWhoDisLike", UserNickname);
-
-            collection.UpdateOne(filter, update);
-
-        }
-
-        public void DismissDisLike(string UserNickname, ObjectId postId)
-        {
-            var filter = Builders<Post>.Filter.Eq("_id", postId);
-            var update = Builders<Post>.Update.Inc("DisLike", -1);
-            collection.UpdateOne(filter, update);
-
-            update = Builders<Post>.Update.Pull("PersonsWhoDisLike", UserNickname);
-            collection.UpdateOne(filter, update);
-        }
-        //
+      
+       
+       
         public List<string> GetPersonsWhoLiked(ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
@@ -106,14 +86,7 @@ namespace DAL.Repository
             return people;
 
         }
-        public List<string> GetPersonsWhoDisLiked(ObjectId postId)
-        {
-            var filter = Builders<Post>.Filter.Eq("_id", postId);
-            var people = collection.Find(filter).Project(x => x.PersonsWhoDisLike).First();
-            return people;
-
-        }
-        //
+   
         public int GetLike(ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
@@ -121,14 +94,8 @@ namespace DAL.Repository
             return like;
         }
 
-        public int GetDislike(ObjectId postId)
-        {
-            var filter = Builders<Post>.Filter.Eq("_id", postId);
-            var dislike = collection.Find(filter).Project(x => x.DisLike).First();
-            return dislike;
-        }
-        //
-        public List<Comment> GetComments(ObjectId postId)
+       
+        public List<Postcomments> GetComments(ObjectId postId)
         {
             var filter = Builders<Post>.Filter.Eq("_id", postId);
             var people = collection.Find(filter).Project(x => x.Comments).First();

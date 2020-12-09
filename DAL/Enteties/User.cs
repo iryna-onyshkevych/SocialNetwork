@@ -35,6 +35,8 @@ namespace DAL.Enteties
         public List<string> Following { get; set; }
 
         [BsonIgnoreIfNull]
+        public string Userlog { get; set; }
+        [BsonIgnoreIfNull]
         public string Date { get; set; }
     }
 

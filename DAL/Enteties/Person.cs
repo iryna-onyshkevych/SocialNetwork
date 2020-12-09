@@ -22,6 +22,8 @@ namespace DAL.Enteties
         [JsonProperty(PropertyName = "mail")]
         public string Email { get; set; }
 
- 
+
+        [JsonProperty(PropertyName = "userlog")]
+        public string Userlog { get; set; }
     }
 }

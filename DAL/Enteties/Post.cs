@@ -29,9 +29,7 @@ namespace DAL.Enteties
         [BsonIgnoreIfNull]
         public List<string> PersonsWhoLike { get; set; }
 
-        
-        [BsonIgnoreIfNull]
-        public List<string> PersonsWhoDisLike { get; set; }
+     
 
         [BsonIgnoreIfNull]
         public List<Postcomments> Comments { get; set; }
