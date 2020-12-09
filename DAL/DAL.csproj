@@ -156,6 +156,9 @@
     <Compile Include="MongodbRepository\PostRepository.cs" />
     <Compile Include="MongodbRepository\UserRepository.cs" />
     <Compile Include="Neo4jRepository\Graph.cs" />
+    <Compile Include="NewServices\PostService.cs" />
+    <Compile Include="NewServices\UserLog.cs" />
+    <Compile Include="NewServices\UserService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
