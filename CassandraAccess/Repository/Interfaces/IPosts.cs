@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cassandra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace CassandraAccess.Repository.Interfaces
 {
     class IPosts
     {
+        void CreatePost(ISession session);
+        void UpdatePost(ISession session);
     }
 }
