@@ -119,13 +119,17 @@
     <Compile Include="Models\Stream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Concrete\Comments.cs" />
+    <Compile Include="Repository\Concrete\Posts.cs" />
+    <Compile Include="Repository\Concrete\Stream.cs" />
+    <Compile Include="Repository\Interfaces\IComment.cs" />
+    <Compile Include="Repository\Interfaces\IPosts.cs" />
+    <Compile Include="Repository\Interfaces\IStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
