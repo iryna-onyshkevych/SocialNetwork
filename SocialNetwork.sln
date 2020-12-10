@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CassandraAccess", "CassandraAccess\CassandraAccess.csproj", "{CEE052C5-8DDB-4C6B-8D33-9C2B83589FAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferData", "TransferData\TransferData.csproj", "{3DB06862-31C9-4142-9324-042C7F948DA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{CEE052C5-8DDB-4C6B-8D33-9C2B83589FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEE052C5-8DDB-4C6B-8D33-9C2B83589FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEE052C5-8DDB-4C6B-8D33-9C2B83589FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB06862-31C9-4142-9324-042C7F948DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB06862-31C9-4142-9324-042C7F948DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB06862-31C9-4142-9324-042C7F948DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB06862-31C9-4142-9324-042C7F948DA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
